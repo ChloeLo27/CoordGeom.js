@@ -1,4 +1,4 @@
-// - MARK: testing for class Point
+// MARK: - testing for class Point
 
 // test init
 var point1 = new Point(3,4);
@@ -28,9 +28,11 @@ console.log(point1.scaleX(3));
 	// EXPECT: {x: -30, y: -14}
 console.log(point1.scaleY(4));
 	// EXPECT: {x: -30, y: -56}
+console.log(point1.clone());
+	// EXPECT: {x: -30, y: -56}
 
 
-// - MARK: testing for class Line
+// MARK: - testing for class Line
 
 // test init
 var line1 = new Line(1,2);
@@ -42,7 +44,7 @@ console.log(line1.yIntercept);
 	// EXPECT: {x: 0, y: 2}
 
 
-// - MARK: testing for class Vector
+// MARK: - testing for class Vector
 
 // test init
 var vector1 = new Vector(3,4);
@@ -74,8 +76,10 @@ console.log(vector1.scaleY(4));
 	// EXPECT: {x: 18, y: 32}
 
 
-// - MARK: testing for class lineSegment
+// MARK: - testing for class lineSegment
 var point2 = new Point(4,5);
+
+// test init
 var lineSegment1 = new lineSegment(point1, point2);
 
 // test calculated properties
@@ -91,10 +95,56 @@ console.log(lineSegment1.slope);
 	// EXPECT: 1.7941176471
 
 
-// - MARK: test for albegraic functions
+// MARK: - testing for class Polygon
+point1.update(-5,-7);
+var point3 = new Point(1,2);
+
+// test init
+var polygon1 = new Polygon([point1, point2, point3]);
+
+// test calculated properties
+console.log(polygon1.numberOfVertices);
+	// EXPECT: 3
+console.log(polygon1.area);
+	// EXPECT: 4.5
+
+// test methods
+console.log(polygon1.translate(3,4));
+	/* EXPECT:
+	{vertices: [
+		{x: -2, y: -3},
+		{x: 7, y: 9},
+		{x: 4, y: 6} ]
+	}
+	*/
+
+
+// MARK: - testing for class Circle
+var circle1 = new Circle(point1, 5);
+
+// test calculated properties
+console.log(circle1.diameter);
+	// EXPECT: 10
+console.log(circle1.area);
+	// EXPECT: 78.5398163397
+console.log(circle1.circumference);
+	// EXPECT: 31.4159265359
+
+// test methods
+console.log(circle1.translate(6,2));
+	/* EXPECT:
+	{center: {x: 1, y: -5},
+	radius: 5} */
+console.log(circle1.setRadius(3));
+	/* EXPECT:
+	{center: {x: 1, y: -5},
+	radius: 3} */
+
+
+
+// MARK: - test for albegraic functions
 
 // set new variables for testing
-point1.update(-5,-7);
 var line2 = new Line(-1,3);
 
 console.log(interceptOfLines(line1, line2));
@@ -115,3 +165,5 @@ console.log(vectorFromPoints(point1, point2));
 
 console.log(reflectPointInLine(point1, line2));
 	// EXPECT: {x: 10, y: 8}
+
+
