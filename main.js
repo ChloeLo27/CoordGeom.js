@@ -2,27 +2,26 @@
 class Point {
   // init function
   constructor(x,y) {
-    // id must be given by the user
-    this.x = x;
-    this.y = y;
+    this.x = x; // TYPE: float
+    this.y = y; // TYPE: float
   }
   
   // all below calculated properties are relative to origin
   get angle() {
-    return Math.atan2(this.y, this.x);
+    return Math.atan2(this.y, this.x); // TYPE: float
   }
   get slope() {
-    return this.y/this.x;
+    return this.y/this.x; // TYPE: float
   }
   get distance() {
-    return Math.hypot(this.x, this.y);
+    return Math.hypot(this.x, this.y); // TYPE: float
   }
   
   // methods
   translate(x, y) {
     this.x = this.x + x;
     this.y = this.y + y;
-    return this;
+    return this; // TYPE: Point
   }
   // all below methods are relative to origin or the axes
   rotate(angle) {
@@ -30,107 +29,106 @@ class Point {
     var y = this.y;
     this.x = x*Math.cos(angle) - y*Math.sin(angle);
     this.y = x*Math.sin(angle) + y*Math.cos(angle);
-    return this;
+    return this; // TYPE: Point
   }
   flipX() {
     this.x = -this.x;
-    return this;
+    return this; // TYPE: Point
   }
   flipY() {
     this.y = -this.y;
-    return this;
+    return this; // TYPE: Point
   }
   scale(factor) {
     this.x = this.x*factor;
     this.y = this.y*factor;
-    return this;
+    return this; // TYPE: Point
   }
   scaleX(factor) {
     this.x = this.x*factor;
-    return this;
+    return this; // TYPE: Point
   }
   scaleY(factor) {
     this.y = this.y*factor;
-    return this;
+    return this; // TYPE: Point
   }
   update(x,y) {
     this.x = x;
     this.y = y;
-    return this;
+    return this; // TYPE: Point
+  }
+  clone() {
+    return new Point(this.x, this.y);
   }
   
 }
-
 
 // - MARK: define class Line
 class Line {
   // init properties
   constructor(m,c) {
-    this.m = m;
-    this.c = c;
+    this.m = m; // TYPE: float
+    this.c = c; // TYPE: float
   }
   
   // calculated properties
   get xIntercept() {
-    return new Point(-this.c/this.m,0);
+    return new Point(-this.c/this.m,0); // TYPE: Point
   }
   get yIntercept() {
-    return new Point(0,this.c);
+    return new Point(0,this.c); // TYPE: Point
   }
 }
 
-
 // - MARK: define class lineSegment
-
 class lineSegment {
   // init
   constructor(point1, point2) {
-    this.point1 = point1;
-    this.point2 = point2;
+    this.point1 = point1.clone(); // TYPE: Point
+    this.point2 = point2.clone(); // TYPE: Point
   }
   
   // calculated properties
   get midpoint() {
     var x = (this.point1.x + this.point2.x)/2;
     var y = (this.point1.y + this.point2.y)/2
-    return new Point(x,y);
+    return new Point(x,y); // TYPE: Point
   }
   get dx() {
-    return this.point2.x - this.point1.x;
+    return this.point2.x - this.point1.x; // TYPE: float
   }
   get dy() {
-    return this.point2.y - this.point1.y;
+    return this.point2.y - this.point1.y; // TYPE: float
   }
   get length() {
-    return Math.hypot(this.dx, this.dy);
+    return Math.hypot(this.dx, this.dy); // TYPE: float
   }
   get slope() {
-    return this.dy/this.dx;
+    return this.dy/this.dx; // TYPE: float
   }
 }
-
 
 // - MARK: define class Vector
 class Vector {
   
   // init properties
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    this.x = x; // TYPE: float
+    this.y = y; // TYPE: float
   }
   
   // calculated properties
   get angle() {
-    return Math.atan2(this.y, this.x);
+    return Math.atan2(this.y, this.x); // TYPE: float
   }
   get slope() {
-    return this.y/this.x;
+    return this.y/this.x; // TYPE: float
   }
   get magnitude() {
-    return Math.hypot(this.x, this.y);
+    return Math.hypot(this.x, this.y); // TYPE: float
   }
   get unitVector() {
-    return new Vector(this.x/this.magnitude, this.y/this.magnitude);
+    return new Vector(this.x/this.magnitude, this.y/this.magnitude); // TYPE: Vector
     // cannot use scale due to float point error
   }
   
@@ -140,37 +138,116 @@ class Vector {
     var y = this.y;
     this.x = x*Math.cos(angle) - y*Math.sin(angle);
     this.y = x*Math.sin(angle) + y*Math.cos(angle);
-    return this;
+    return this; // TYPE: Vector
   }
   flipX() {
     this.x = -this.x;
-    return this;
+    return this; // TYPE: Vector
   }
   flipY() {
     this.y = -this.y;
-    return this;
+    return this; // TYPE: Vector
   }
   negative() {
     this.flipX().flipY();
-    return this;
+    return this; // TYPE: Vector
   }
   scale(factor) {
     this.x = this.x*factor;
     this.y = this.y*factor;
-    return this;
+    return this; // TYPE: Vector
   }
   scaleX(factor) {
     this.x = this.x*factor;
-    return this;
+    return this; // TYPE: Vector
   }
   scaleY(factor) {
     this.y = this.y*factor;
-    return this;
+    return this; // TYPE: Vector
+  }
+}
+
+// MARK: - define class Polygon
+class Polygon {
+  
+  // init
+  constructor(points) {
+    var pointsClone = [];
+    for (var i=0; i<points.length; i++) {
+      pointsClone.push(points[i].clone());
+    }
+    this.vertices = pointsClone; // TYPE: [point]
+  }
+  
+  // calculated properties
+  get numberOfVertices() {
+    return this.vertices.length; // TYPE: int
+  }
+  get area() {
+    var total1 = 0;
+    var total2 = 0;
+    var n = this.numberOfVertices;
+    for (var i = 0; i < n; i++) {
+      if (i == 0) {
+        // handle first case
+        total1 += this.vertices[0].x*this.vertices[1].y;
+        total2 += this.vertices[0].x*this.vertices[n-1].y;
+      } else if (i < n-1) {
+        // handle anything in between
+        total1 += this.vertices[i].x*this.vertices[i+1].y;
+        total2 += this.vertices[i].x*this.vertices[i-1].y;
+      } else {
+        // handle last case
+        total1 += this.vertices[n-1].x*this.vertices[0].y;
+        total2 += this.vertices[n-1].x*this.vertices[n-2].y;
+      }
+    }
+    return Math.abs(total1 - total2)/2; // TYPE: float
+  }
+  
+  // methods
+  translate(x,y) {
+    for (var i=0; i<this.numberOfVertices; i++) {
+      this.vertices[i].translate(x,y);
+    }
+    return this; // TYPE: Polygon
+  }
+  
+}
+
+// MARK: - define class Circle
+class Circle {
+  
+  // init
+  constructor(center, radius) {
+    this.center = center.clone(); // TYPE: Point
+    this.radius = radius; // TYPE: float
+  }
+  
+  // calculated properties
+  get diameter() {
+    return this.radius*2;
+  }
+  get area() {
+    return Math.PI*this.radius*this.radius; // TYPE: float
+  }
+  get circumference() {
+    return Math.PI*2*this.radius; // TYPE: float
+  }
+  
+  // methods
+  translate(x,y) {
+    this.center.translate(x,y);
+    return this; // TYPE: Circle
+  }
+  setRadius(r) {
+    this.radius = r;
+    return this; // TYPE: Circle
   }
 }
 
 
-// - MARK: geometrical functions
+// MARK: - geometrical functions
 
 function interceptOfLines(line1, line2) {
   var x = (line2.c-line1.c)/(line1.m-line2.m);
