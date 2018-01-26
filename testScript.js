@@ -35,13 +35,49 @@ console.log(point1.clone());
 // MARK: - testing for class Line
 
 // test init
-var line1 = new Line(1,2);
+var line1 = new Line(new Point(0,2),new Point(1,3));
+var line2 = new Line(new Point(1,7),new Point(1,3));
+var line3 = new Line(new Point(9,3),new Point(1,3));
 
 // test calculated properties
+console.log(line1.m);
+	// EXPECT: 1
+console.log(line1.c);
+	// EXPECT: 2
 console.log(line1.xIntercept);
 	// EXPECT: {x: -2, y: 0}
 console.log(line1.yIntercept);
 	// EXPECT: {x: 0, y: 2}
+console.log(line1.isVertical);
+	// EXPECT: false
+console.log(line1.isHorizontal);
+	// EXPECT: false
+
+console.log(line2.m);
+	// EXPECT: NaN
+console.log(line2.c);
+	// EXPECT: NaN
+console.log(line2.xIntercept);
+	// EXPECT: {x: 1, y: 0}
+console.log(line2.yIntercept);
+	// EXPECT: NaN
+console.log(line2.isVertical);
+	// EXPECT: true
+console.log(line2.isHorizontal);
+	// EXPECT: false
+
+console.log(line3.m);
+	// EXPECT: 0
+console.log(line3.c);
+	// EXPECT: 3
+console.log(line3.xIntercept);
+	// EXPECT: NaN
+console.log(line3.yIntercept);
+	// EXPECT: {x: 0, y: 3}
+console.log(line3.isVertical);
+	// EXPECT: false
+console.log(line3.isHorizontal);
+	// EXPECT: true
 
 
 // MARK: - testing for class Vector
@@ -80,7 +116,7 @@ console.log(vector1.scaleY(4));
 var point2 = new Point(4,5);
 
 // test init
-var lineSegment1 = new lineSegment(point1, point2);
+var lineSegment1 = new LineSegment(point1, point2);
 
 // test calculated properties
 console.log(lineSegment1.midpoint);
@@ -145,25 +181,29 @@ console.log(circle1.setRadius(3));
 // MARK: - test for albegraic functions
 
 // set new variables for testing
-var line2 = new Line(-1,3);
+var line4 = new Line(new Point(5,6), new Point(7,8));
+var line5 = new Line(new Point(5,6), new Point(7,4));
 
-console.log(interceptOfLines(line1, line2));
-	// EXPECT: {x: 0.5, y: 2.5}
+console.log(interceptOfLines(line1, line4));
+	// EXPECT: NaN
+console.log(interceptOfLines(line1, line5));
+	// EXPECT: {x: 4.5, y: 6.5}
+console.log(interceptOfLines(line1, line2)); // vertical line at x=1
+	// EXPECT: {x: 1, y: 3}
+console.log(interceptOfLines(line1, line3)); // horizontal line at y=3
+	// EXPECT: {x: 1, y: 3}
 
-console.log(lineFromPointSlope(point2, 2));
-	// EXPECT: {c: -3, m: 2}
+var line6 = lineFromPointSlope(point2, 2);
+console.log(line6.c);
+	// EXPECT: -3
+console.log(line6.m);
+	// EXPECT: 2
 
-console.log(lineFromPoints(point1, point2));
-	// EXPECT: {c: -0.3333333333333333, m: 1.3333333333333333}
-	// float point error gives: {c: -0.33333333333333304, m: 1.3333333333333333}
-
-console.log(translatePointByVector(point1, vector1));
+console.log(newPointByVector(point1, vector1));
 	// EXPECT: {x: 13, y: 25}
 
 console.log(vectorFromPoints(point1, point2));
 	// EXPECT: {x: 9, y: 12}
 
-console.log(reflectPointInLine(point1, line2));
+console.log(newPointReflectInLine(point1, line4));
 	// EXPECT: {x: 10, y: 8}
-
-
