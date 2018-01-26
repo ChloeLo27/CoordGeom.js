@@ -20,7 +20,10 @@ This framework currently covers the following objects:
 Also the following cross object functions:
 - intercept of two lines
 - line from point and slope
-- line from two points
-- translate point by vector
+- new point translated by vector
 - vector from two points
 - reflect point in line
+- new point reflected in line
+- dot product of two vectors
+- angle between two vectors
+- intersection of a circle and a line
