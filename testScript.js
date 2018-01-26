@@ -206,4 +206,4 @@ console.log(vectorFromPoints(point1, point2));
 	// EXPECT: {x: 9, y: 12}
 
 console.log(newPointReflectInLine(point1, line4));
-	// EXPECT: {x: 10, y: 8}
+	// EXPECT: {x: -8, y: -4}
