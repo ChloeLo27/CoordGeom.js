@@ -243,3 +243,9 @@ console.log(angleBetweenVectors(vector1, vector4));
 console.log(angleBetweenVectors(vector1, vector5));
 	// EXPECT: 0
 
+console.log(intersectionOfCircleAndLine(circle1, line4));
+	// EXPECT: []
+console.log(intersectionOfCircleAndLine(circle1, new Line(new Point(1,-2), new Point(6,-2))));
+	// EXPECT: [{x: 1, y: -2}]
+console.log(intersectionOfCircleAndLine(circle1, line2));
+	// EXPECT: [{x: 1, y: -2}, {x: 1, y: -8}]
