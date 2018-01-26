@@ -215,11 +215,11 @@ console.log(line6.c);
 console.log(line6.m);
 	// EXPECT: 2
 
-console.log(newPointByVector(point1, vector1));
+console.log(newPointTranslatedByVector(point1, vector1));
 	// EXPECT: {x: 13, y: 25}
 console.log(vectorFromPoints(point1, point2));
 	// EXPECT: {x: 9, y: 12}
-console.log(newPointReflectInLine(point1, line4));
+console.log(newPointReflectedInLine(point1, line4));
 	// EXPECT: {x: -8, y: -4}
 
 vector1 = new Vector(3,4);
