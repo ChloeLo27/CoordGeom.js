@@ -154,18 +154,33 @@ class Vector {
   }
   
   // calculated properties
+  get isZeroVector() {
+    return (this.x == 0 && this.y == 0);
+  }
   get angle() {
-    return Math.atan2(this.y, this.x); // TYPE: float
+    if (!this.isZeroVector) {
+      return Math.atan2(this.y, this.x); // TYPE: float
+    } else {
+      return NaN;
+    }
   }
   get slope() {
-    return this.y/this.x; // TYPE: float
+    if (!this.isZeroVector && (this.x != 0)) {
+      return this.y/this.x; // TYPE: float
+    } else {
+      return NaN;
+    }
   }
   get magnitude() {
     return Math.hypot(this.x, this.y); // TYPE: float
   }
   get unitVector() {
-    return new Vector(this.x/this.magnitude, this.y/this.magnitude); // TYPE: Vector
+    if (!this.isZeroVector) {
+      return new Vector(this.x/this.magnitude, this.y/this.magnitude); // TYPE: Vector
     // cannot use scale due to float point error
+    } else {
+      return NaN;
+    }
   }
   
   // methods
@@ -329,5 +344,15 @@ function newPointReflectInLine(point, line) {
     return new Point(point.x, 2*line.c - point.y);
   } else {
     return new Point(2*line.xIntercept.x - point.x, point.y);
+  }
+}
+function dotProduct(vector1, vector2) {
+  return vector1.x*vector2.x + vector1.y*vector2.y;
+}
+function angleBetweenVectors(vector1, vector2) {
+  if (!vector1.isZeroVector && !vector2.isZeroVector) {
+    return Math.acos(dotProduct(vector1, vector2)/(vector1.magnitude*vector2.magnitude));
+  } else {
+    return NaN;
   }
 }
