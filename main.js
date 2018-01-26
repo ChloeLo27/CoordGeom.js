@@ -317,29 +317,22 @@ function interceptOfLines(line1, line2) {
   }
 }
 function lineFromPointSlope(point, m) {
-  var point2 = newPointByVector(point, new Vector(1,m));
+  var point2 = newPointTranslatedByVector(point, new Vector(1,m));
   return new Line(point, point2);
 }
-function lineFromPoints(point1, point2) {
-  var x1 = point1.x;
-  var y1 = point1.y;
-  var x2 = point2.x;
-  var y2 = point2.y;
-  return new Line((y2-y1)/(x2-x1), y1-(y2*x1-y1*x1)/(x2-x1));
-}
-function newPointByVector(point, vector) {
+function newPointTranslatedByVector(point, vector) {
   return new Point(point.x+vector.x, point.y+vector.y);
 }
 function vectorFromPoints(point1, point2) {
   return new Vector(point2.x - point1.x, point2.y - point1.y);
 }
-function newPointReflectInLine(point, line) {
+function newPointReflectedInLine(point, line) {
   if (!isNaN(line.m) && (line.m != 0)) {
     var m2 = -1/line.m;
     var line2 = lineFromPointSlope(point, m2);
     var intercept = interceptOfLines(line, line2);
     var change = vectorFromPoints(point, intercept);
-    return newPointByVector(intercept, change);
+    return newPointTranslatedByVector(intercept, change);
   } else if (line.m == 0) {
     return new Point(point.x, 2*line.c - point.y);
   } else {
