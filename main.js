@@ -65,23 +65,55 @@ class Point {
 
 // - MARK: define class Line
 class Line {
-  // init properties
-  constructor(m,c) {
-    this.m = m; // TYPE: float
-    this.c = c; // TYPE: float
+  // init
+  constructor(point1, point2) {
+    this.point1 = point1.clone();
+    this.point2 = point2.clone();
   }
   
   // calculated properties
-  get xIntercept() {
-    return new Point(-this.c/this.m,0); // TYPE: Point
+  get m() {
+    if (this.point1.x != this.point2.x) {
+      var dx = this.point1.x - this.point2.x;
+      var dy = this.point1.y - this.point2.y;
+      return dy/dx;
+    } else {
+      return NaN;
+    }
   }
   get yIntercept() {
-    return new Point(0,this.c); // TYPE: Point
+    if (!isNaN(this.m)) {
+      return new Point(0, this.point1.y - this.m*this.point1.x);
+    } else {
+      return NaN;
+    }
+  }
+  get c() {
+    if (!isNaN(this.m)) {
+      return this.point1.y - this.m*this.point1.x
+    } else {
+      return NaN;
+    }
+  }
+  get xIntercept() {
+    if (this.m != 0 && !isNaN(this.m)) {
+      return new Point(this.point1.x - this.point1.y/this.m, 0);
+    } else if (this.m == 0) {
+      return NaN;
+    } else {
+      return new Point(this.point1.x, 0);
+    }
+  }
+  get isVertical() {
+    return isNaN(this.m);
+  }
+  get isHorizontal() {
+    return (this.m == 0);
   }
 }
 
 // - MARK: define class lineSegment
-class lineSegment {
+class LineSegment {
   // init
   constructor(point1, point2) {
     this.point1 = point1.clone(); // TYPE: Point
@@ -104,7 +136,11 @@ class lineSegment {
     return Math.hypot(this.dx, this.dy); // TYPE: float
   }
   get slope() {
-    return this.dy/this.dx; // TYPE: float
+    if (this.dx != 0) {
+      return this.dy/this.dx; // TYPE: float
+    } else {
+      return NaN;
+    }
   }
 }
 
@@ -250,12 +286,24 @@ class Circle {
 // MARK: - geometrical functions
 
 function interceptOfLines(line1, line2) {
-  var x = (line2.c-line1.c)/(line1.m-line2.m);
-  return new Point(x,line1.m*x+line1.c);
+  if ((line1.m != line2.m) && !isNaN(line1.m) && !isNaN(line2.m)) {
+    var x = (line2.c-line1.c)/(line1.m-line2.m);
+    return new Point(x,line1.m*x+line1.c);
+  } else if ((isNaN(line1.m) && isNaN(line2.m)) || (line1.m == line2.m)) {
+    return NaN
+  } else {
+    if (isNaN(line1.m)) {
+      var x = line1.xIntercept.x;
+      return new Point(x, line2.m*x + line2.c);
+    } else {
+      var x = line2.xIntercept.x;
+      return new Point(x, line1.m*x + line1.c);
+    }
+  }
 }
 function lineFromPointSlope(point, m) {
-  var c = point.y - m*point.x;
-  return new Line(m, c);
+  var point2 = newPointByVector(point, new Vector(1,m));
+  return new Line(point, point2);
 }
 function lineFromPoints(point1, point2) {
   var x1 = point1.x;
@@ -264,16 +312,22 @@ function lineFromPoints(point1, point2) {
   var y2 = point2.y;
   return new Line((y2-y1)/(x2-x1), y1-(y2*x1-y1*x1)/(x2-x1));
 }
-function translatePointByVector(point, vector) {
+function newPointByVector(point, vector) {
   return new Point(point.x+vector.x, point.y+vector.y);
 }
 function vectorFromPoints(point1, point2) {
   return new Vector(point2.x - point1.x, point2.y - point1.y);
 }
-function reflectPointInLine(point, line) {
-  var m2 = -1/line.m;
-  var line2 = lineFromPointSlope(point, m2);
-  var intercept = interceptOfLines(line, line2);
-  var change = vectorFromPoints(point, intercept);
-  return translatePointByVector(intercept, change);
+function newPointReflectInLine(point, line) {
+  if (!isNaN(line.m) && (line.m != 0)) {
+    var m2 = -1/line.m;
+    var line2 = lineFromPointSlope(point, m2);
+    var intercept = interceptOfLines(line, line2);
+    var change = vectorFromPoints(point, intercept);
+    return newPointByVector(intercept, change);
+  } else if (line.m == 0) {
+    return new Point(point.x, 2*line.c - point.y);
+  } else {
+    return new Point(2*line.xIntercept.x - point.x, point.y);
+  }
 }
