@@ -356,3 +356,37 @@ function angleBetweenVectors(vector1, vector2) {
     return NaN;
   }
 }
+function intersectionOfCircleAndLine(circle, line) {
+  var r = circle.radius;
+  var a = circle.center.x;
+  var b = circle.center.y;
+  if (!isNaN(line.m)) {
+    var m = line.m;
+    var c = line.c;
+    var qa = m*m + 1;
+    var qb = 2*(m*(c-b)-a);
+    var qc = a*a + (c-b)*(c-b) - r*r;
+    var delta = qb*qb - 4*qa*qc;
+    if (delta < 0) {
+      return [];
+    } else if (delta == 0) {
+      var x = -qb/(2*qa);
+      return [new Point(x, x*m + c)];
+    } else {
+      var x1 = (-qb + Math.sqrt(delta))/(2*qa);
+      var x2 = (-qb - Math.sqrt(delta))/(2*qa);
+      return [new Point(x1, x1*m + c), new Point(x2, x2*m + c)];
+    }
+  } else {
+    // update when point in/out/on circle is implemented?
+    var x = line.xIntercept.x;
+    var d = Math.abs(x - a);
+    if (d < r) {
+      return [new Point(x,b+Math.sqrt(r*r-d*d)), new Point(x,b-Math.sqrt(r*r-d*d))];
+    } else if (d == r) {
+      return [new Point(x, b)];
+    } else {
+      return [];
+    }
+  }
+}
