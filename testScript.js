@@ -53,6 +53,7 @@ console.log(line1.isVertical);
 console.log(line1.isHorizontal);
 	// EXPECT: false
 
+// test edge cases
 console.log(line2.m);
 	// EXPECT: NaN
 console.log(line2.c);
@@ -86,6 +87,8 @@ console.log(line3.isHorizontal);
 var vector1 = new Vector(3,4);
 
 // test calculated properties
+console.log(vector1.isZeroVector);
+	// EXPECT: false
 console.log(vector1.angle);
 	// EXPECT: 0.9272952180016122
 console.log(vector1.slope);
@@ -110,6 +113,19 @@ console.log(vector1.scaleX(3));
 	// EXPECT: {x: 18, y: 8}
 console.log(vector1.scaleY(4));
 	// EXPECT: {x: 18, y: 32}
+
+// test singularities
+var vector2 = new Vector(0,0);
+console.log(vector2.isZeroVector);
+	// EXPECT: true
+console.log(vector2.angle);
+	// EXPECT: NaN
+console.log(vector2.slope);
+	// EXPECT: NaN
+console.log(vector2.magnitude);
+	// EXPECT: 0
+console.log(vector2.unitVector);
+	// EXPECT: NaN
 
 
 // MARK: - testing for class lineSegment
@@ -201,9 +217,29 @@ console.log(line6.m);
 
 console.log(newPointByVector(point1, vector1));
 	// EXPECT: {x: 13, y: 25}
-
 console.log(vectorFromPoints(point1, point2));
 	// EXPECT: {x: 9, y: 12}
-
 console.log(newPointReflectInLine(point1, line4));
 	// EXPECT: {x: -8, y: -4}
+
+vector1 = new Vector(3,4);
+var vector3 = new Vector(4,3);
+var vector4 = new Vector(4,-3);
+var vector5 = new Vector(6,8);
+console.log(dotProduct(vector1, vector2));
+	// EXPECT: 0
+console.log(dotProduct(vector1, vector3));
+	// EXPECT: 24
+console.log(dotProduct(vector1, vector4));
+	// EXPECT: 0
+console.log(dotProduct(vector1, vector5));
+	// EXPECT: 50
+console.log(angleBetweenVectors(vector1, vector2));
+	// EXPECT: NaN
+console.log(angleBetweenVectors(vector1, vector3));
+	// EXPECT: 0.2837941092
+console.log(angleBetweenVectors(vector1, vector4));
+	// EXPECT: 1.5707963268
+console.log(angleBetweenVectors(vector1, vector5));
+	// EXPECT: 0
+
