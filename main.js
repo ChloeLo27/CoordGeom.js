@@ -76,39 +76,39 @@ class Line {
     if (this.point1.x != this.point2.x) {
       var dx = this.point1.x - this.point2.x;
       var dy = this.point1.y - this.point2.y;
-      return dy/dx;
+      return dy/dx; // TYPE: float
     } else {
       return NaN;
     }
   }
   get yIntercept() {
     if (!isNaN(this.m)) {
-      return new Point(0, this.point1.y - this.m*this.point1.x);
+      return new Point(0, this.point1.y - this.m*this.point1.x); // TYPE: Point
     } else {
       return NaN;
     }
   }
   get c() {
     if (!isNaN(this.m)) {
-      return this.point1.y - this.m*this.point1.x
+      return this.point1.y - this.m*this.point1.x // TYPE: float
     } else {
       return NaN;
     }
   }
   get xIntercept() {
     if (this.m != 0 && !isNaN(this.m)) {
-      return new Point(this.point1.x - this.point1.y/this.m, 0);
+      return new Point(this.point1.x - this.point1.y/this.m, 0); // TYPE: Point
     } else if (this.m == 0) {
       return NaN;
     } else {
-      return new Point(this.point1.x, 0);
+      return new Point(this.point1.x, 0); // TYPE: Point
     }
   }
   get isVertical() {
-    return isNaN(this.m);
+    return isNaN(this.m); // TYPE: bool
   }
   get isHorizontal() {
-    return (this.m == 0);
+    return (this.m == 0); // TYPE: bool
   }
 }
 
@@ -155,7 +155,7 @@ class Vector {
   
   // calculated properties
   get isZeroVector() {
-    return (this.x == 0 && this.y == 0);
+    return (this.x == 0 && this.y == 0); // TYPE: bool
   }
   get angle() {
     if (!this.isZeroVector) {
@@ -277,7 +277,7 @@ class Circle {
   
   // calculated properties
   get diameter() {
-    return this.radius*2;
+    return this.radius*2; // TYPE: float
   }
   get area() {
     return Math.PI*this.radius*this.radius; // TYPE: float
@@ -303,28 +303,28 @@ class Circle {
 function interceptOfLines(line1, line2) {
   if ((line1.m != line2.m) && !isNaN(line1.m) && !isNaN(line2.m)) {
     var x = (line2.c-line1.c)/(line1.m-line2.m);
-    return new Point(x,line1.m*x+line1.c);
+    return new Point(x,line1.m*x+line1.c); // TYPE: Point
   } else if ((isNaN(line1.m) && isNaN(line2.m)) || (line1.m == line2.m)) {
     return NaN
   } else {
     if (isNaN(line1.m)) {
       var x = line1.xIntercept.x;
-      return new Point(x, line2.m*x + line2.c);
+      return new Point(x, line2.m*x + line2.c); // TYPE: Point
     } else {
       var x = line2.xIntercept.x;
-      return new Point(x, line1.m*x + line1.c);
+      return new Point(x, line1.m*x + line1.c); // TYPE: Point
     }
   }
 }
 function lineFromPointSlope(point, m) {
   var point2 = newPointTranslatedByVector(point, new Vector(1,m));
-  return new Line(point, point2);
+  return new Line(point, point2); // TYPE: Line
 }
 function newPointTranslatedByVector(point, vector) {
-  return new Point(point.x+vector.x, point.y+vector.y);
+  return new Point(point.x+vector.x, point.y+vector.y); // TYPE: Point
 }
 function vectorFromPoints(point1, point2) {
-  return new Vector(point2.x - point1.x, point2.y - point1.y);
+  return new Vector(point2.x - point1.x, point2.y - point1.y); // TYPE: Vector
 }
 function newPointReflectedInLine(point, line) {
   if (!isNaN(line.m) && (line.m != 0)) {
@@ -336,15 +336,15 @@ function newPointReflectedInLine(point, line) {
   } else if (line.m == 0) {
     return new Point(point.x, 2*line.c - point.y);
   } else {
-    return new Point(2*line.xIntercept.x - point.x, point.y);
+    return new Point(2*line.xIntercept.x - point.x, point.y); // TYPE: Point
   }
 }
 function dotProduct(vector1, vector2) {
-  return vector1.x*vector2.x + vector1.y*vector2.y;
+  return vector1.x*vector2.x + vector1.y*vector2.y; // TYPE: float
 }
 function angleBetweenVectors(vector1, vector2) {
   if (!vector1.isZeroVector && !vector2.isZeroVector) {
-    return Math.acos(dotProduct(vector1, vector2)/(vector1.magnitude*vector2.magnitude));
+    return Math.acos(dotProduct(vector1, vector2)/(vector1.magnitude*vector2.magnitude)); // TYPE: float
   } else {
     return NaN;
   }
@@ -364,20 +364,20 @@ function intersectionOfCircleAndLine(circle, line) {
       return [];
     } else if (delta == 0) {
       var x = -qb/(2*qa);
-      return [new Point(x, x*m + c)];
+      return [new Point(x, x*m + c)]; // TYPE: [Point]
     } else {
       var x1 = (-qb + Math.sqrt(delta))/(2*qa);
       var x2 = (-qb - Math.sqrt(delta))/(2*qa);
-      return [new Point(x1, x1*m + c), new Point(x2, x2*m + c)];
+      return [new Point(x1, x1*m + c), new Point(x2, x2*m + c)]; // TYPE: [Point]
     }
   } else {
     // update when point in/out/on circle is implemented?
     var x = line.xIntercept.x;
     var d = Math.abs(x - a);
     if (d < r) {
-      return [new Point(x,b+Math.sqrt(r*r-d*d)), new Point(x,b-Math.sqrt(r*r-d*d))];
+      return [new Point(x,b+Math.sqrt(r*r-d*d)), new Point(x,b-Math.sqrt(r*r-d*d))]; // TYPE: [Point]
     } else if (d == r) {
-      return [new Point(x, b)];
+      return [new Point(x, b)]; // TYPE: [Point]
     } else {
       return [];
     }
