@@ -23,6 +23,11 @@ class Point {
     this.y = this.y + y;
     return this; // TYPE: Point
   }
+  translateByVector(vector) {
+    this.x = this.x + vector.x;
+    this.y = this.y + vector.y;
+    return this;
+  }
   // all below methods are relative to origin or the axes
   rotate(angle) {
     var x = this.x;
@@ -47,7 +52,6 @@ class Point {
   clone() {
     return new Point(this.x, this.y);
   }
-  
 }
 
 // - MARK: define class Line
@@ -400,6 +404,30 @@ function intersectionOfCircleAndLine(circle, line) {
     }
   }
 }
+function intersectionOfCircles(circle1, circle2) {
+  // check whether the two circles overlapped
+  var center1ToCenter2 = vectorFromPoints(circle1.center, circle2.center);
+  var d = center1ToCenter2.magnitude;
+  var r1 = circle1.radius;
+  var r2 = circle2.radius;
+  var angle = center1ToCenter2.angle;
+  if (d < r1 + r2) {
+    // obtain the solution where origin at center of c1
+    // and c2 rotated to have same y as c1
+    var solX = (r1*r1 - r2*r2 + d*d)/(2*d);
+    var solY1 = Math.sqrt((r1*r1) - (solX*solX));
+    var solY2 = -solY1;
+    // transform the solutions to the correct coordinates
+    var sol1 = new Point(solX, solY1).flipY().rotate(-angle).flipY().translateByVector(circle1.center);
+    var sol2 = new Point(solX, solY2).flipY().rotate(-angle).flipY().translateByVector(circle1.center);
+    return [sol1, sol2]; // TYPE: [Point]
+  } else if (d == r1 + r2) {
+    var sol = new Point(r1, 0).flipY().rotate(-angle).flipY().translateByVector(circle1.center);
+    return [sol]; // TYPE: [Point]
+  } else {
+    return []; // TYPE: [Point]
+  }
+}
 function pointIsOnLine(point, line) {
   return (point.y == line.m*point.x + line.c); // TYPE: bool
 }
@@ -477,7 +505,7 @@ function pointsDrawPolygon(points) {
       }
       angleSum += angleBetweenVectors(toPreviousVertex, toNextVertex);
     }
-    return (angleSum == Math.PI*(points.length - 2));
+    return (angleSum == Math.PI*(points.length - 2)); // TYPE: bool
   }
 }
 
