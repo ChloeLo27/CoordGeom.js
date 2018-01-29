@@ -424,11 +424,11 @@ function intersectionOfCircles(circle1, circle2) { // TYPE: Circle, Circle
     var solY1 = Math.sqrt((r1*r1) - (solX*solX));
     var solY2 = -solY1;
     // transform the solutions to the correct coordinates
-    var sol1 = new Point(solX, solY1).flipY().rotate(-angle).flipY().translateByVector(circle1.center);
-    var sol2 = new Point(solX, solY2).flipY().rotate(-angle).flipY().translateByVector(circle1.center);
+    var sol1 = new Point(solX, solY1).rotate(angle).translateByVector(circle1.center);
+    var sol2 = new Point(solX, solY2).rotate(angle).translateByVector(circle1.center);
     return [sol1, sol2]; // TYPE: [Point]
   } else if (d == r1 + r2) {
-    var sol = new Point(r1, 0).flipY().rotate(-angle).flipY().translateByVector(circle1.center);
+    var sol = new Point(r1, 0).rotate(angle).translateByVector(circle1.center);
     return [sol]; // TYPE: [Point]
   } else {
     return []; // TYPE: [Point]
