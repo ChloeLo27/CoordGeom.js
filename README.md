@@ -28,6 +28,7 @@ Also the following cross object functions:
 - dot product of two vectors
 - angle between two vectors
 - intersection of a circle and a line
+- intersection of two circles
 - point is on line
 - point is on line segment
 - point is strictly in circle
