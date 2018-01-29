@@ -21,10 +21,19 @@ This framework currently covers the following objects:
 Also the following cross object functions:
 - intercept of two lines
 - line from point and slope
+- line from line segment
 - new point translated by vector
 - vector from two points
-- reflect point in line
 - new point reflected in line
 - dot product of two vectors
 - angle between two vectors
 - intersection of a circle and a line
+- point is on line
+- point is on line segment
+- point is strictly in circle
+- point is on circle circumference
+- point is strictly out of circle
+- point is strictly in polygon
+- point is on polygon edge
+- point is strictly out of polygon
+- the points draw a polygon
