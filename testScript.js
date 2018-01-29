@@ -25,7 +25,7 @@ console.log(point1.flipY());
 console.log(point1.update(-5,-7));
 	// EXPECT: {x: -5, y: -7}
 console.log(point1.clone());
-	// EXPECT: {x: -30, y: -56}
+	// EXPECT: {x: -5, y: -7}
 
 
 // MARK: - testing for class Line
@@ -259,7 +259,8 @@ vector1 = new Vector(3,4);
 var vector3 = new Vector(4,3);
 var vector4 = new Vector(4,-3);
 var vector5 = new Vector(6,8);
-console.log(dotProduct(vector1, vector2));
+console.log("    - dot product");
+console.log(dotProduct(vector1, vector2)); // vector 2 is zero vector
 	// EXPECT: 0
 console.log(dotProduct(vector1, vector3));
 	// EXPECT: 24
@@ -267,7 +268,8 @@ console.log(dotProduct(vector1, vector4));
 	// EXPECT: 0
 console.log(dotProduct(vector1, vector5));
 	// EXPECT: 50
-console.log(angleBetweenVectors(vector1, vector2));
+console.log("    - angle between vectors");
+console.log(angleBetweenVectors(vector1, vector2)); // vector 2 is zero vector
 	// EXPECT: NaN
 console.log(angleBetweenVectors(vector1, vector3));
 	// EXPECT: 0.2837941092
@@ -278,12 +280,26 @@ console.log(angleBetweenVectors(vector1, vector5));
 
 // testing circle intersections
 console.log("===== CIRCLE INTERSECTONS =====");
+var circle2 = new Circle(new Point(4, -9), 3);
+var circle3 = new Circle(new Point(1, 0), 2);
+console.log("    - circle and line");
 console.log(intersectionOfCircleAndLine(circle1, line4));
 	// EXPECT: []
 console.log(intersectionOfCircleAndLine(circle1, new Line(new Point(1,-2), new Point(6,-2))));
 	// EXPECT: [{x: 1, y: -2}]
 console.log(intersectionOfCircleAndLine(circle1, line2));
 	// EXPECT: [{x: 1, y: -2}, {x: 1, y: -8}]
+console.log("    - two circles");
+console.log(intersectionOfCircles(circle1, circle2));
+	/* EXPECT: [
+		{x: 1.17335008385784, y: -7.99498743710662},
+		{x: 3.82664991614216, y: -6.00501256289338}
+	] */
+console.log(intersectionOfCircles(circle1, circle3));
+	// EXPECT: [{x: 1, y: -2}]
+	// float point error returns x: 1.0000000000000002 instead
+console.log(intersectionOfCircles(circle2, circle3));
+	// EXPECT: []
 
 // testing on line or line segments
 console.log("===== ON LINE OR LINE SEGMENTS =====");
