@@ -248,8 +248,6 @@ console.log(line7.m);
 console.log("===== POINT OPERATIONS =====");
 console.log(newPointTranslatedByVector(point1, vector1));
 	// EXPECT: {x: 13, y: 25}
-console.log(vectorFromPoints(point1, point2));
-	// EXPECT: {x: 9, y: 12}
 console.log(newPointReflectedInLine(point1, line4));
 	// EXPECT: {x: -8, y: -4}
 
@@ -259,6 +257,8 @@ vector1 = new Vector(3,4);
 var vector3 = new Vector(4,3);
 var vector4 = new Vector(4,-3);
 var vector5 = new Vector(6,8);
+console.log(vectorFromPoints(point1, point2));
+	// EXPECT: {x: 9, y: 12}
 console.log("    - dot product");
 console.log(dotProduct(vector1, vector2)); // vector 2 is zero vector
 	// EXPECT: 0
@@ -277,6 +277,11 @@ console.log(angleBetweenVectors(vector1, vector4));
 	// EXPECT: 1.5707963268
 console.log(angleBetweenVectors(vector1, vector5));
 	// EXPECT: 0
+console.log("    - vector addition and subtraction");
+console.log(addVectors(vector1, vector3));
+	// EXPECT: {x: 7, y: 7}
+console.log(subtractVectors(vector1, vector5));
+	// EXPECT: {x: -3, y: -4}
 
 // testing circle intersections
 console.log("===== CIRCLE INTERSECTONS =====");
