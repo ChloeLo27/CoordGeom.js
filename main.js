@@ -39,19 +39,6 @@ class Point {
     this.y = -this.y;
     return this; // TYPE: Point
   }
-  scale(factor) {
-    this.x = this.x*factor;
-    this.y = this.y*factor;
-    return this; // TYPE: Point
-  }
-  scaleX(factor) {
-    this.x = this.x*factor;
-    return this; // TYPE: Point
-  }
-  scaleY(factor) {
-    this.y = this.y*factor;
-    return this; // TYPE: Point
-  }
   update(x,y) {
     this.x = x;
     this.y = y;
@@ -109,6 +96,26 @@ class Line {
   }
   get isHorizontal() {
     return (this.m == 0); // TYPE: bool
+  }
+  
+  // methods
+  calY(x) {
+    if (!isNaN(this.m)) {
+      return this.m*x + this.c; // TYPE: float
+    } else {
+      return NaN;
+    }
+  }
+  calX(y) {
+    if (!isNaN(this.m)) {
+      if (this.m != 0) {
+        return (y - this.c)/this.m; // TYPE: float
+      } else {
+        return NaN;
+      }
+    } else {
+      return this.xIntercept.x;
+    }
   }
 }
 
@@ -224,10 +231,18 @@ class Polygon {
   // init
   constructor(points) {
     var pointsClone = [];
+    var edges = [];
     for (var i=0; i<points.length; i++) {
       pointsClone.push(points[i].clone());
+      if (i < points.length - 1) {
+        var edge = new LineSegment(points[i], points[i+1]);
+      } else {
+        var edge = new LineSegment(points[i], points[0]);
+      }
+      edges.push(edge);
     }
     this.vertices = pointsClone; // TYPE: [point]
+    this.edges = edges;
   }
   
   // calculated properties
@@ -299,7 +314,6 @@ class Circle {
 
 
 // MARK: - geometrical functions
-
 function interceptOfLines(line1, line2) {
   if ((line1.m != line2.m) && !isNaN(line1.m) && !isNaN(line2.m)) {
     var x = (line2.c-line1.c)/(line1.m-line2.m);
@@ -319,6 +333,9 @@ function interceptOfLines(line1, line2) {
 function lineFromPointSlope(point, m) {
   var point2 = newPointTranslatedByVector(point, new Vector(1,m));
   return new Line(point, point2); // TYPE: Line
+}
+function lineFromLineSegment(lineSegment) {
+  return new Line(lineSegment.point1, lineSegment.point2);
 }
 function newPointTranslatedByVector(point, vector) {
   return new Point(point.x+vector.x, point.y+vector.y); // TYPE: Point
@@ -381,5 +398,104 @@ function intersectionOfCircleAndLine(circle, line) {
     } else {
       return [];
     }
+  }
+}
+function pointIsOnLine(point, line) {
+  return (point.y == line.m*point.x + line.c); // TYPE: bool
+}
+function pointIsOnLineSegment(point, lineSegment) {
+  var point1 = lineSegment.point1;
+  var point2 = lineSegment.point2;
+  var line = new Line(point1, point2);
+  var lowerBound = Math.min(point1.x, point2.x);
+  var upperBound = Math.max(point1.x, point2.x);
+  return (pointIsOnLine(point, line) && (point.x >= lowerBound) && (point.x <= upperBound)); // TYPE: bool
+}
+function pointIsStrictlyInCircle(point, circle) {
+  var pointFromCenter = vectorFromPoints(point, circle.center);
+  return (pointFromCenter.magnitude < circle.radius);
+}
+function pointIsOnCircleCircumference(point, circle) {
+  var pointFromCenter = vectorFromPoints(point, circle.center);
+  return (pointFromCenter.magnitude == circle.radius);
+}
+function pointIsStrictlyOutOfCircle(point, circle) {
+  var pointFromCenter = vectorFromPoints(point, circle.center);
+  return (pointFromCenter.magnitude > circle.radius);
+}
+function pointIsOnPolygonEdge(point, polygon) {
+  var onEdge = false;
+  polygon.edges.forEach(function(edge) {
+    if (pointIsOnLineSegment(point, edge)) {
+      onEdge = true;
+    }
+  });
+  return onEdge; // TYPE: bool
+}
+function pointIsStrictlyInPolygon(point, polygon) {
+  var windingNumber = 0;
+  polygon.edges.forEach(function(edge) {
+    var thisVertex = edge.point1;
+    var nextVertex = edge.point2;
+    var lineFromEdge = lineFromLineSegment(edge);
+    if (thisVertex.y <= point.y) {
+      if (nextVertex.y > point.y) {
+        if (lineIsLeftOfPoint(lineFromEdge, point)) {
+          windingNumber++;
+        }
+      }
+    } else {
+      if (nextVertex.y <= point.y) {
+        if (lineIsLeftOfPoint(lineFromEdge, point)) {
+          windingNumber--;
+        }
+      }
+    }
+  });
+  return (Math.abs(windingNumber) == 1); // TYPE: bool
+}
+function pointIsStrictlyOutOfPolygon(point, polygon) {
+  return (!pointIsOnPolygonEdge(point, polygon) && !pointIsStrictlyInPolygon(point, polygon)); // TYPE: bool
+}
+function pointsDrawPolygon(points) {
+  if (points.length < 3) {
+    return false;
+  } else {
+    var angleSum = 0;
+    var toNextVertex;
+    var toPreviousVertex;
+    for (var i=0; i < points.length; i++) {
+      if (i == 0) {
+        toPreviousVertex = vectorFromPoints(points[0],points[points.length-1]);
+        toNextVertex = vectorFromPoints(points[0],points[1]);
+      } else if (i == (points.length-1)) {
+        toPreviousVertex = vectorFromPoints(points[i],points[i-1]);
+        toNextVertex = vectorFromPoints(points[i],points[0]);
+      } else {
+        toPreviousVertex = vectorFromPoints(points[i],points[i-1]);
+        toNextVertex = vectorFromPoints(points[i],points[i+1]);
+      }
+      angleSum += angleBetweenVectors(toPreviousVertex, toNextVertex);
+    }
+    return (angleSum == Math.PI*(points.length - 2));
+  }
+}
+
+
+// MARK: - helper functions
+
+function lineIsLeftOfPoint(line, point) {
+  if (!isNaN(line.m)) {
+    if (line.m == 0) {
+      return false;
+    } else {
+      if (pointIsOnLine(point, line)) {
+        return false
+      } else {
+        return (line.calX(point.y) < point.x);
+      }
+    }
+  } else {
+    return (line.xIntercept.x < point.x);
   }
 }
