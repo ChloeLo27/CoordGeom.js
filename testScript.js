@@ -1,5 +1,7 @@
 // MARK: - testing for class Point
 
+console.log("===== CLASS POINT =====");
+
 // test init
 var point1 = new Point(3,4);
 
@@ -22,17 +24,13 @@ console.log(point1.flipY());
 	// EXPECT: {x: 3.56217782649107, y: -7.830127018922194}
 console.log(point1.update(-5,-7));
 	// EXPECT: {x: -5, y: -7}
-console.log(point1.scale(2));
-	// EXPECT: {x: -10, y: -14}
-console.log(point1.scaleX(3));
-	// EXPECT: {x: -30, y: -14}
-console.log(point1.scaleY(4));
-	// EXPECT: {x: -30, y: -56}
 console.log(point1.clone());
 	// EXPECT: {x: -30, y: -56}
 
 
 // MARK: - testing for class Line
+
+console.log("===== CLASS LINE =====");
 
 // test init
 var line1 = new Line(new Point(0,2),new Point(1,3));
@@ -52,6 +50,10 @@ console.log(line1.isVertical);
 	// EXPECT: false
 console.log(line1.isHorizontal);
 	// EXPECT: false
+console.log(line1.calX(10));
+	// EXPECT: 8
+console.log(line1.calY(-9));
+	// EXPECT: -7
 
 // test edge cases
 console.log(line2.m);
@@ -66,6 +68,10 @@ console.log(line2.isVertical);
 	// EXPECT: true
 console.log(line2.isHorizontal);
 	// EXPECT: false
+console.log(line2.calX(10));
+	// EXPECT: 1
+console.log(line2.calY(-9));
+	// EXPECT: NaN
 
 console.log(line3.m);
 	// EXPECT: 0
@@ -79,9 +85,15 @@ console.log(line3.isVertical);
 	// EXPECT: false
 console.log(line3.isHorizontal);
 	// EXPECT: true
+console.log(line3.calX(10));
+	// EXPECT: NaN
+console.log(line3.calY(-9));
+	// EXPECT: 3
 
 
 // MARK: - testing for class Vector
+
+console.log("===== CLASS VECTOR =====");
 
 // test init
 var vector1 = new Vector(3,4);
@@ -129,6 +141,9 @@ console.log(vector2.unitVector);
 
 
 // MARK: - testing for class lineSegment
+
+console.log("===== CLASS LINE-SEGMENT =====");
+
 var point2 = new Point(4,5);
 
 // test init
@@ -148,6 +163,9 @@ console.log(lineSegment1.slope);
 
 
 // MARK: - testing for class Polygon
+
+console.log("===== CLASS POLYGON =====");
+
 point1.update(-5,-7);
 var point3 = new Point(1,2);
 
@@ -172,6 +190,9 @@ console.log(polygon1.translate(3,4));
 
 
 // MARK: - testing for class Circle
+
+console.log("===== CLASS CIRCLE =====");
+
 var circle1 = new Circle(point1, 5);
 
 // test calculated properties
@@ -196,10 +217,10 @@ console.log(circle1.setRadius(3));
 
 // MARK: - test for albegraic functions
 
-// set new variables for testing
+// testing line intersections
+console.log("===== LINE INTERSECTIONS =====");
 var line4 = new Line(new Point(5,6), new Point(7,8));
 var line5 = new Line(new Point(5,6), new Point(7,4));
-
 console.log(interceptOfLines(line1, line4));
 	// EXPECT: NaN
 console.log(interceptOfLines(line1, line5));
@@ -209,12 +230,22 @@ console.log(interceptOfLines(line1, line2)); // vertical line at x=1
 console.log(interceptOfLines(line1, line3)); // horizontal line at y=3
 	// EXPECT: {x: 1, y: 3}
 
+// testing new line operations
+console.log("===== NEW LINE OPERATIONS =====");
 var line6 = lineFromPointSlope(point2, 2);
+var line7 = lineFromLineSegment(lineSegment1);
 console.log(line6.c);
 	// EXPECT: -3
 console.log(line6.m);
 	// EXPECT: 2
+console.log(line7.c);
+	// EXPECT: -0.3333333333333
+	// Float point error will return -0.3333333333333339 instead
+console.log(line7.m);
+	// EXPECT: 1.33333333333333
 
+// testing point operations
+console.log("===== POINT OPERATIONS =====");
 console.log(newPointTranslatedByVector(point1, vector1));
 	// EXPECT: {x: 13, y: 25}
 console.log(vectorFromPoints(point1, point2));
@@ -222,6 +253,8 @@ console.log(vectorFromPoints(point1, point2));
 console.log(newPointReflectedInLine(point1, line4));
 	// EXPECT: {x: -8, y: -4}
 
+// testing vector algebra
+console.log("===== VECTOR ALGEBRA =====");
 vector1 = new Vector(3,4);
 var vector3 = new Vector(4,3);
 var vector4 = new Vector(4,-3);
@@ -243,9 +276,86 @@ console.log(angleBetweenVectors(vector1, vector4));
 console.log(angleBetweenVectors(vector1, vector5));
 	// EXPECT: 0
 
+// testing circle intersections
+console.log("===== CIRCLE INTERSECTONS =====");
 console.log(intersectionOfCircleAndLine(circle1, line4));
 	// EXPECT: []
 console.log(intersectionOfCircleAndLine(circle1, new Line(new Point(1,-2), new Point(6,-2))));
 	// EXPECT: [{x: 1, y: -2}]
 console.log(intersectionOfCircleAndLine(circle1, line2));
 	// EXPECT: [{x: 1, y: -2}, {x: 1, y: -8}]
+
+// testing on line or line segments
+console.log("===== ON LINE OR LINE SEGMENTS =====");
+var point4 = new Point(-9, line7.calY(-9));
+var lineSegment2 = new LineSegment(new Point(5,6), new Point(7,8));
+console.log(pointIsOnLine(point2, line6));
+	// EXPECT: true
+console.log(pointIsOnLine(point1, line6));
+	// EXPECT: false
+console.log(pointIsOnLineSegment(lineSegment1.midpoint, lineSegment1))
+	// EXPECT: true
+	// float point error return false due to imprecise slope
+console.log(pointIsOnLineSegment(lineSegment2.midpoint, lineSegment2));
+	// EXPECT: true
+console.log(pointIsOnLineSegment(point4, lineSegment1));
+	// EXPECT: false
+console.log(pointIsOnLineSegment(point3, lineSegment1));
+	// EXPECT: false
+
+// testing in out circles
+console.log("===== IN OUT CIRCLE =====");
+var origin = new Point(0,0);
+var point5 = new Point(-2, -5);
+var point6 = new Point(2, -4);
+console.log(pointIsStrictlyInCircle(origin, circle1));
+	// EXPECT: false
+console.log(pointIsStrictlyInCircle(point5, circle1));
+	// EXPECT: false
+console.log(pointIsStrictlyInCircle(point6, circle1));
+	// EXPECT: true
+console.log(pointIsOnCircleCircumference(origin, circle1));
+	// EXPECT: false
+console.log(pointIsOnCircleCircumference(point5, circle1));
+	// EXPECT: true
+console.log(pointIsOnCircleCircumference(point6, circle1));
+	// EXPECT: false
+console.log(pointIsStrictlyOutOfCircle(origin, circle1));
+	// EXPECT: true
+console.log(pointIsStrictlyOutOfCircle(point5, circle1));
+	// EXPECT: false
+console.log(pointIsStrictlyOutOfCircle(point6, circle1));
+	// EXPECT: false
+
+// testing in out polygon
+console.log("===== IN OUT POLYGON =====");
+var point7 = new Point(3,4); // on edge
+var point8 = new Point(1,-1); // outside
+console.log(pointIsOnPolygonEdge(origin, polygon1));
+	// EXPECT: false
+console.log(pointIsOnPolygonEdge(point7, polygon1));
+	// EXPECT: true
+console.log(pointIsOnPolygonEdge(point8, polygon1));
+	// EXPECT: false
+console.log(pointIsStrictlyInPolygon(origin, polygon1));
+	// EXPECT: true
+console.log(pointIsStrictlyInPolygon(point7, polygon1));
+	// EXPECT: false
+console.log(pointIsStrictlyInPolygon(point8, polygon1));
+	// EXPECT: false
+console.log(pointIsStrictlyOutOfPolygon(origin, polygon1));
+	// EXPECT: false
+console.log(pointIsStrictlyOutOfPolygon(point7, polygon1));
+	// EXPECT: false
+console.log(pointIsStrictlyOutOfPolygon(point8, polygon1));
+	// EXPECT: true
+
+// testing formation of polygon from points
+console.log("===== POINTS FORM POLYGON OR NOT =====");
+console.log(pointsDrawPolygon([point1, point3, point2, point5]));
+	// EXPECT: true
+console.log(pointsDrawPolygon([point1, point2, point3, point5]));
+	// expect: false
+
+
+
