@@ -5,6 +5,7 @@ A JavaScript framework developed for coordinate geometry calculation with vector
 Please note that this framework is still under construction.
 
 ## CAUTION
+- **WARNING**: This library **DOES NOT** handle float point error.  Please bare this in mind.
 - when constructing new polygon, please check whether the points really form one before setting up the new object.
 - all points passed to new *polygon*, new *line segment* and new *circle* will be cloned, therefore de-referenced.  So any changes made to the point forming the algebraic object will not affect the already created object.
 
