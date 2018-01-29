@@ -344,9 +344,6 @@ function lineFromLineSegment(lineSegment) {
 function newPointTranslatedByVector(point, vector) {
   return new Point(point.x+vector.x, point.y+vector.y); // TYPE: Point
 }
-function vectorFromPoints(point1, point2) {
-  return new Vector(point2.x - point1.x, point2.y - point1.y); // TYPE: Vector
-}
 function newPointReflectedInLine(point, line) {
   if (!isNaN(line.m) && (line.m != 0)) {
     var m2 = -1/line.m;
@@ -360,6 +357,9 @@ function newPointReflectedInLine(point, line) {
     return new Point(2*line.xIntercept.x - point.x, point.y); // TYPE: Point
   }
 }
+function vectorFromPoints(point1, point2) {
+  return new Vector(point2.x - point1.x, point2.y - point1.y); // TYPE: Vector
+}
 function dotProduct(vector1, vector2) {
   return vector1.x*vector2.x + vector1.y*vector2.y; // TYPE: float
 }
@@ -369,6 +369,12 @@ function angleBetweenVectors(vector1, vector2) {
   } else {
     return NaN;
   }
+}
+function addVectors(vector1, vector2) { // TYPE: Vector, Vector
+  return new Vector(vector1.x+vector2.x, vector1.y+vector2.y);
+}
+function subtractVectors(vector1, vector2) { // TYPE: Vector, Vector
+  return new Vector(vector1.x-vector2.x, vector1.y-vector2.y);
 }
 function intersectionOfCircleAndLine(circle, line) {
   var r = circle.radius;
