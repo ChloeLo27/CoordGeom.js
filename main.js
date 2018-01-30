@@ -1,5 +1,5 @@
 /*
-CoordGeom.js
+CoordGeom.js - main.js
 A JAVASCRIPT FRAMEWORK FOR COORDINATE GEOMETRY + VECTOR
 
 Creator:    Chloe Lo

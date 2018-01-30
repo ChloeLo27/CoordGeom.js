@@ -1,0 +1,9 @@
+/*
+CoordGeom.js - ui.js
+A JAVASCRIPT FRAMEWORK FOR COORDINATE GEOMETRY + VECTOR - UI COMPONENT
+
+Creator:    Chloe Lo
+Created at: 30 JAN 2018
+*/
+
+// # UI COMPONENT
