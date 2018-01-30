@@ -1,3 +1,16 @@
+/*
+CoordGeom.js
+A JAVASCRIPT FRAMEWORK FOR COORDINATE GEOMETRY + VECTOR
+
+Creator:    Chloe Lo
+Created at: 24 JAN 2018
+
+RELEASES
+v0.0-alpha: 30 JAN 2018
+*/
+
+// # ALBEGRA COMPONENT
+
 // - MARK: defining properties of class Point
 class Point {
   // init function
