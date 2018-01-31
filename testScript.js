@@ -1,3 +1,5 @@
+// # ALGEBRA COMPONENT
+
 // MARK: - testing for class Point
 
 console.log("===== CLASS POINT =====");
@@ -379,4 +381,12 @@ console.log(pointsDrawPolygon([point1, point2, point3, point5]));
 	// expect: false
 
 
+// # UI COMPONENT
 
+// MARK: - test for class Canvas
+
+var canvas = new Canvas();
+canvas.HTMLelement.addEventListener('click', function(event) {
+  var offset = new Point(event.pageX - canvas.offset.x, event.pageY - canvas.offset.y);
+  canvas.drawPointWithAttributes(offset, {"class": "red", "id": 56});
+})

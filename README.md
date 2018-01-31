@@ -10,6 +10,8 @@ Please note that this framework is still under construction.
 - all points passed to new *polygon*, new *line segment* and new *circle* will be cloned, therefore de-referenced.  So any changes made to the point forming the algebraic object will not affect the already created object.
 
 ## Capabilities
+
+### Algebra Component
 This framework currently covers the following objects:
 - point
 - line
@@ -38,3 +40,6 @@ Also the following cross object functions:
 - point is on polygon edge
 - point is strictly out of polygon
 - the points draw a polygon
+
+### UI Component
+This framework also built in some basic drawing capabilities.  If you have a `<div />` with id `canvas` in your HTML body, then you may plot various geometrical objects onto it.
