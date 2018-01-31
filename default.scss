@@ -12,6 +12,11 @@ Created at: 31 JAN 2018
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
 }
 
 @mixin circle($radius) {
@@ -24,7 +29,7 @@ Created at: 31 JAN 2018
 
 span.point {
   @include anchor-at-center();
-  @include circle(5px);
+  @include circle(7px);
   position: absolute;
   border: 1px solid black;
   background-color: rgba(0,0,0,0.3);
