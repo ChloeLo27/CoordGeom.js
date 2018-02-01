@@ -449,9 +449,9 @@ function intersectionOfCircles(circle1, circle2) { // TYPE: Circle, Circle
 }
 function isCircleInCircle(circle1, circle2) { // TYPE: Circle, Circle
   if (intersectionOfCircles(circle1, circle2).length > 0) {
-    return false;
+    return false; // TYPE: Bool
   } else {
-    return ((pointIsStrictlyInCircle(circle1.center, circle2)) || (pointIsStrictlyInCircle(circle2.center, circle1)));
+    return ((pointIsStrictlyInCircle(circle1.center, circle2)) || (pointIsStrictlyInCircle(circle2.center, circle1))); // TYPE: bool
   }
 }
 function pointIsOnLine(point, line) { // TYPE: Point, Line
