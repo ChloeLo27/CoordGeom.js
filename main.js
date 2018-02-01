@@ -430,7 +430,7 @@ function intersectionOfCircles(circle1, circle2) { // TYPE: Circle, Circle
   var r1 = circle1.radius;
   var r2 = circle2.radius;
   var angle = center1ToCenter2.angle;
-  if (d < r1 + r2) {
+  if (d < r1 + r2 && d > 0) {
     // obtain the solution where origin at center of c1
     // and c2 rotated to have same y as c1
     var solX = (r1*r1 - r2*r2 + d*d)/(2*d);
@@ -445,6 +445,13 @@ function intersectionOfCircles(circle1, circle2) { // TYPE: Circle, Circle
     return [sol]; // TYPE: [Point]
   } else {
     return []; // TYPE: [Point]
+  }
+}
+function isCircleInCircle(circle1, circle2) { // TYPE: Circle, Circle
+  if (intersectionOfCircles(circle1, circle2).length > 0) {
+    return false;
+  } else {
+    return ((pointIsStrictlyInCircle(circle1.center, circle2)) || (pointIsStrictlyInCircle(circle2.center, circle1)));
   }
 }
 function pointIsOnLine(point, line) { // TYPE: Point, Line

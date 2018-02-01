@@ -331,23 +331,34 @@ console.log("===== IN OUT CIRCLE =====");
 var origin = new Point(0,0);
 var point5 = new Point(-2, -5);
 var point6 = new Point(2, -4);
+var circle4 = new Circle(circle1.center, 1);
+console.log("   - point is strictly in circle");
 console.log(pointIsStrictlyInCircle(origin, circle1));
 	// EXPECT: false
 console.log(pointIsStrictlyInCircle(point5, circle1));
 	// EXPECT: false
 console.log(pointIsStrictlyInCircle(point6, circle1));
 	// EXPECT: true
+console.log("   - point is on circle circumference");
 console.log(pointIsOnCircleCircumference(origin, circle1));
 	// EXPECT: false
 console.log(pointIsOnCircleCircumference(point5, circle1));
 	// EXPECT: true
 console.log(pointIsOnCircleCircumference(point6, circle1));
 	// EXPECT: false
+console.log("   - point is strictly out of circle");
 console.log(pointIsStrictlyOutOfCircle(origin, circle1));
 	// EXPECT: true
 console.log(pointIsStrictlyOutOfCircle(point5, circle1));
 	// EXPECT: false
 console.log(pointIsStrictlyOutOfCircle(point6, circle1));
+	// EXPECT: false
+console.log("	- is circle in circle");
+console.log(isCircleInCircle(circle1, circle4));
+	// EXPECT: true
+console.log(isCircleInCircle(circle2, circle3));
+	// EXPECT: false
+console.log(isCircleInCircle(circle1, circle2));
 	// EXPECT: false
 
 // testing in out polygon
