@@ -153,15 +153,15 @@ var lineSegment1 = new LineSegment(point1, point2);
 
 // test calculated properties
 console.log(lineSegment1.midpoint);
-	// EXPECT: {x: -13, y: -25.5}
+	// EXPECT: {x: -0.5, y: -1}
 console.log(lineSegment1.dx);
-	// EXPECT: 34
+	// EXPECT: 9
 console.log(lineSegment1.dy);
-	// EXPECT: 61
+	// EXPECT: 12
 console.log(lineSegment1.length);
-	// EXPECT: 69.8355210477
+	// EXPECT: 15
 console.log(lineSegment1.slope);
-	// EXPECT: 1.7941176471
+	// EXPECT: 1.33333333333333333
 
 
 // MARK: - testing for class Polygon
@@ -183,10 +183,13 @@ console.log(polygon1.area);
 // test methods
 console.log(polygon1.translate(3,4));
 	/* EXPECT:
-	{vertices: [
-		{x: -2, y: -3},
-		{x: 7, y: 9},
-		{x: 4, y: 6} ]
+	{
+		edges: { --snipped for brevity-- },
+		vertices: [
+			{x: -2, y: -3},
+			{x: 7, y: 9},
+			{x: 4, y: 6}
+		]
 	}
 	*/
 
@@ -234,24 +237,58 @@ console.log(interceptOfLines(line1, line3)); // horizontal line at y=3
 
 // testing new line operations
 console.log("===== NEW LINE OPERATIONS =====");
-var line6 = lineFromPointSlope(point2, 2);
-var line7 = lineFromLineSegment(lineSegment1);
+var line6 = newLineFromPointSlope(point2, 2);
+var line8 = newLineFromPointSlope(point2, NaN);
+var line7 = newLineFromLineSegment(lineSegment1);
+var line9 = perpendicularBisector(lineSegment1);
 console.log(line6.c);
 	// EXPECT: -3
 console.log(line6.m);
 	// EXPECT: 2
+console.log(line8.c);
+	// EXPECT: NaN
+console.log(line8.m);
+	// EXPECT: NaN
+console.log(line8.xIntercept.x);
+	// EXPECT: 4
 console.log(line7.c);
 	// EXPECT: -0.3333333333333
 	// Float point error will return -0.3333333333333339 instead
 console.log(line7.m);
 	// EXPECT: 1.33333333333333
+console.log(line9.c);
+	// EXPECT: -1.375
+console.log(line9.m);
+	// EXPECT: -0.75
 
 // testing point operations
 console.log("===== POINT OPERATIONS =====");
 console.log(newPointTranslatedByVector(point1, vector1));
 	// EXPECT: {x: 13, y: 25}
+console.log(projectedPointOnLine(point1, line4));
+	// EXPECT: {x: -6.5, y: -5.5}
+console.log(projectedPointOnLine(point1, line7));
+	// EXPECT: {x: -5, y: -7}
+console.log(projectedPointOnLine(point1, line2));
+	// EXPECT: {x: 1, y: -7}
+console.log(projectedPointOnLine(point1, line3));
+	// EXPECT: {x: -5, y: 3}
 console.log(newPointReflectedInLine(point1, line4));
 	// EXPECT: {x: -8, y: -4}
+console.log(newPointReflectedInLine(point1, line7));
+	// EXPECT: {x: -5, y: -7}
+console.log(newPointReflectedInLine(point1, line2));
+	// EXPECT: {x: 7, y: -7}
+console.log(newPointReflectedInLine(point1, line3));
+	// EXPECT: {x: -5, y: 13}
+console.log(distanceOfPointFromLine(point1, line4));
+	// EXPECT: 2.1213203436
+console.log(distanceOfPointFromLine(point1, line7));
+	// EXPECT: 0
+console.log(distanceOfPointFromLine(point1, line2));
+	// EXPECT: 6
+console.log(distanceOfPointFromLine(point1, line3));
+	// EXPECT: 10
 
 // testing vector algebra
 console.log("===== VECTOR ALGEBRA =====");

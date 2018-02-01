@@ -146,8 +146,8 @@ class LineSegment {
   
   // calculated properties
   get midpoint() {
-    var x = (this.point1.x + this.point2.x)/2;
-    var y = (this.point1.y + this.point2.y)/2
+    var x = (parseFloat(this.point1.x) + parseFloat(this.point2.x))/2;
+    var y = (parseFloat(this.point1.y) + parseFloat(this.point2.y))/2
     return new Point(x,y); // TYPE: Point
   }
   get dx() {
@@ -331,6 +331,8 @@ class Circle {
 
 
 // MARK: - geometrical functions
+
+// - point and line interaction
 function interceptOfLines(line1, line2) { // TYPE: Line, Line
   if ((line1.m != line2.m) && !isNaN(line1.m) && !isNaN(line2.m)) {
     var x = (line2.c-line1.c)/(line1.m-line2.m);
@@ -347,29 +349,57 @@ function interceptOfLines(line1, line2) { // TYPE: Line, Line
     }
   }
 }
-function lineFromPointSlope(point, m) { // TYPE: Point, float
-  var point2 = newPointTranslatedByVector(point, new Vector(1,m));
+function newLineFromPointSlope(point, m) { // TYPE: Point, float
+  var point2;
+  if (!isNaN(m)) {
+    point2 = newPointTranslatedByVector(point, new Vector(1,m));
+    
+  } else {
+    point2 = newPointTranslatedByVector(point, new Vector(0,1));
+  }
   return new Line(point, point2); // TYPE: Line
 }
-function lineFromLineSegment(lineSegment) { // TYPE: LineSegment
+function newLineFromLineSegment(lineSegment) { // TYPE: LineSegment
   return new Line(lineSegment.point1, lineSegment.point2); // TYPE: Line
+}
+function perpendicularBisector(lineSegment) { // TYPE: LineSegment
+  var m;
+  if (lineSegment.slope == 0) {
+    m = NaN;
+  } else if (isNaN(lineSegment.slope)) {
+    m = 0
+  } else {
+    m = -1/lineSegment.slope;
+  }
+  return newLineFromPointSlope(lineSegment.midpoint, m);
 }
 function newPointTranslatedByVector(point, vector) { // TYPE: Point, Vector
   return new Point(point.x+vector.x, point.y+vector.y); // TYPE: Point
 }
-function newPointReflectedInLine(point, line) { // TYPE: Point, Line
-  if (!isNaN(line.m) && (line.m != 0)) {
+function projectedPointOnLine(point, line) { // TYPE: Point, Line
+  if (pointIsOnLine(point, line)) {
+    return point.clone(); // TYPE: Point
+  } else if (!isNaN(line.m) && (line.m != 0)) {
     var m2 = -1/line.m;
-    var line2 = lineFromPointSlope(point, m2);
+    var line2 = newLineFromPointSlope(point, m2);
     var intercept = interceptOfLines(line, line2);
-    var change = vectorFromPoints(point, intercept);
-    return newPointTranslatedByVector(intercept, change); // TYPE: Point
+    return intercept; // TYPE: Point
   } else if (line.m == 0) {
-    return new Point(point.x, 2*line.c - point.y); // TYPE: Point
+    return new Point(point.x, line.c); // TYPE: Point
   } else {
-    return new Point(2*line.xIntercept.x - point.x, point.y); // TYPE: Point
+    return new Point(line.xIntercept.x, point.y); // TYPE: Point
   }
 }
+function newPointReflectedInLine(point, line) { // TYPE: Point, Line
+  var intercept = projectedPointOnLine(point, line);
+  var change = vectorFromPoints(point, intercept);
+  return newPointTranslatedByVector(intercept, change); 
+}
+function distanceOfPointFromLine(point, line) { // TYPE: Point, Line
+  var projection = projectedPointOnLine(point, line);
+  return new LineSegment(point, projection).length; // TYPE: float
+}
+// - vectors
 function vectorFromPoints(point1, point2) { // TYPE: Point, Point
   return new Vector(point2.x - point1.x, point2.y - point1.y); // TYPE: Vector
 }
@@ -389,6 +419,7 @@ function addVectors(vector1, vector2) { // TYPE: Vector, Vector
 function subtractVectors(vector1, vector2) { // TYPE: Vector, Vector
   return new Vector(vector1.x-vector2.x, vector1.y-vector2.y); // TYPE: Vector
 }
+// - circle interactions
 function intersectionOfCircleAndLine(circle, line) { // TYPE: Circle, Line
   var r = circle.radius;
   var a = circle.center.x;
@@ -449,11 +480,12 @@ function intersectionOfCircles(circle1, circle2) { // TYPE: Circle, Circle
 }
 function isCircleInCircle(circle1, circle2) { // TYPE: Circle, Circle
   if (intersectionOfCircles(circle1, circle2).length > 0) {
-    return false; // TYPE: Bool
+    return false; // TYPE: bool
   } else {
     return ((pointIsStrictlyInCircle(circle1.center, circle2)) || (pointIsStrictlyInCircle(circle2.center, circle1))); // TYPE: bool
   }
 }
+// - on line or line segment
 function pointIsOnLine(point, line) { // TYPE: Point, Line
   return (point.y == line.m*point.x + line.c); // TYPE: bool
 }
@@ -465,6 +497,7 @@ function pointIsOnLineSegment(point, lineSegment) { // TYPE: Point, LineSegment
   var upperBound = Math.max(point1.x, point2.x);
   return (pointIsOnLine(point, line) && (point.x >= lowerBound) && (point.x <= upperBound)); // TYPE: bool
 }
+// - point is in out circle
 function pointIsStrictlyInCircle(point, circle) { // TYPE: Point, Circle
   var pointFromCenter = vectorFromPoints(point, circle.center);
   return (pointFromCenter.magnitude < circle.radius); // TYPE: bool
@@ -477,6 +510,7 @@ function pointIsStrictlyOutOfCircle(point, circle) { // TYPE: Point, Circle
   var pointFromCenter = vectorFromPoints(point, circle.center);
   return (pointFromCenter.magnitude > circle.radius); // TYPE: bool
 }
+// - polygon
 function pointIsOnPolygonEdge(point, polygon) { // TYPE: Point, Polygon
   var onEdge = false;
   polygon.edges.forEach(function(edge) {
@@ -491,7 +525,7 @@ function pointIsStrictlyInPolygon(point, polygon) { // TYPE: Point, Polygon
   polygon.edges.forEach(function(edge) {
     var thisVertex = edge.point1;
     var nextVertex = edge.point2;
-    var lineFromEdge = lineFromLineSegment(edge);
+    var lineFromEdge = newLineFromLineSegment(edge);
     if (thisVertex.y <= point.y) {
       if (nextVertex.y > point.y) {
         if (lineIsLeftOfPoint(lineFromEdge, point)) {
