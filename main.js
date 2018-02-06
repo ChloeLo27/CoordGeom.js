@@ -21,7 +21,11 @@ class Point {
   
   // all below calculated properties are relative to origin
   get angle() {
-    return Math.atan2(this.y, this.x); // TYPE: float
+    if (!(this.y == 0 and this.x == 0)) {
+      return Math.atan2(this.y, this.x); // TYPE: float
+    } else {
+      return NaN;
+    }
   }
   get slope() {
     return this.y/this.x; // TYPE: float
@@ -155,6 +159,13 @@ class LineSegment {
   }
   get dy() {
     return this.point2.y - this.point1.y; // TYPE: float
+  }
+  get angle() {
+    if (!(dx == 0 && dy == 0)) {
+      return Math.atan2(dy, dx); // TYPE: float
+    } else {
+      return NaN;
+    }
   }
   get length() {
     return Math.hypot(this.dx, this.dy); // TYPE: float

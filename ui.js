@@ -56,12 +56,26 @@ class Canvas {
     }
   }
   
-  // methods
+  // general methods
   getEventOffset(event) {
   	return new Point(event.pageX - canvas.offset.x, event.pageY - canvas.offset.y);
   }
+  addClassToObject(className, objectOnCanvas) {
+  	var classString = className + " " + objectOnCanvas.DOMelement.getAttribute("class");
+  	objectOnCanvas.DOMelement.setAttribute("class", classString);
+  }
+  removeClassFromObject(className, objectOnCanvas) {
+  	var classString = objectOnCanvas.DOMelement.getAttribute("class");
+  	var newClassString = classString.replace(className, "");
+  	objectOnCanvas.DOMelement.setAttribute("class", newClassString);
+  }
   // method - point manipulation
-  addPoint(point) { // TYPE: Point
+  getPointWithId(id) {
+  	return this.pointsOnCanvas.find(function (pointOnCanvas) {
+    	return pointOnCanvas.id == id;
+    });
+  }
+  addPointOnCanvas(point) { // TYPE: Point
   	// create the DOM element
   	var pointOnCanvas = new PointOnCanvas(point);
     var lastPointOnCanvas = this.lastPointOnCanvas;
@@ -75,8 +89,8 @@ class Canvas {
     this.pointsOnCanvas.push(pointOnCanvas);
     return pointOnCanvas; // TYPE: PointOnCanvas
   }
-  addPointWithAttributes(point, attributes) { // TYPE: Point, JSON
-  	var addedPoint = this.addPoint(point);
+  addPointOnCanvasWithAttributes(point, attributes) { // TYPE: Point, JSON
+  	var addedPoint = this.addPointOnCanvas(point);
     // set custom attributes
     if (attributes.hasOwnProperty("class")) {
     	attributes["class"] += " point";
@@ -95,13 +109,10 @@ class Canvas {
       // change to filter if later consider using ctrl+z
     }
   }
-  removePointOnCanvasOfId(id) {
-  	var pointOnCanvasToRemove = this.pointsOnCanvas.find(function (pointOnCanvas) {
-    	return pointOnCanvas.id == id;
-    });
+  removePointOnCanvasWithId(id) {
+  	var pointOnCanvasToRemove = this.getPointWithId(id);
     this.removePointOnCanvas(pointOnCanvasToRemove);
   }
-
 }
 
 // MARK: - class PoinOnCanvas
