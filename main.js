@@ -7,6 +7,8 @@ Created at: 24 JAN 2018
 
 RELEASES
 v0.0-alpha: 30 JAN 2018
+v0.1-alpha:  1 FEB 2018
+v0.2-alpha:  6 FEB 2018
 */
 
 // # ALBEGRA COMPONENT
@@ -21,14 +23,18 @@ class Point {
   
   // all below calculated properties are relative to origin
   get angle() {
-    if (!(this.y == 0 and this.x == 0)) {
+    if (!(this.y == 0 && this.x == 0)) {
       return Math.atan2(this.y, this.x); // TYPE: float
     } else {
       return NaN;
     }
   }
   get slope() {
-    return this.y/this.x; // TYPE: float
+    if (!(this.y == 0 && this.x == 0)) {
+      return this.y/this.x; // TYPE: float
+    } else {
+      return NaN;
+    }
   }
   get distance() {
     return Math.hypot(this.x, this.y); // TYPE: float
@@ -161,8 +167,8 @@ class LineSegment {
     return this.point2.y - this.point1.y; // TYPE: float
   }
   get angle() {
-    if (!(dx == 0 && dy == 0)) {
-      return Math.atan2(dy, dx); // TYPE: float
+    if (!(this.dx == 0 && this.dy == 0)) {
+      return Math.atan2(this.dy, this.dx); // TYPE: float
     } else {
       return NaN;
     }

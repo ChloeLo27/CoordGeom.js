@@ -6,6 +6,7 @@ console.log("===== CLASS POINT =====");
 
 // test init
 var point1 = new Point(3,4);
+var origin = new Point(0,0);
 
 // test calculated properties
 console.log(point1.angle);
@@ -14,6 +15,12 @@ console.log(point1.slope);
 	// EXPECT: 1.3333333333333333
 console.log(point1.distance);
 	// EXPECT: 5
+console.log(origin.angle);
+	// EXPECT: NaN
+console.log(origin.slope);
+	// EXPECT: NaN
+console.log(origin.distance);
+	// EXPECT: 0
 
 // test methods
 console.log(point1.translate(2,3));
@@ -158,6 +165,8 @@ console.log(lineSegment1.dx);
 	// EXPECT: 9
 console.log(lineSegment1.dy);
 	// EXPECT: 12
+console.log(lineSegment1.angle);
+	// EXPECT: 0.927295218
 console.log(lineSegment1.length);
 	// EXPECT: 15
 console.log(lineSegment1.slope);
@@ -365,7 +374,6 @@ console.log(pointIsOnLineSegment(point3, lineSegment1));
 
 // testing in out circles
 console.log("===== IN OUT CIRCLE =====");
-var origin = new Point(0,0);
 var point5 = new Point(-2, -5);
 var point6 = new Point(2, -4);
 var circle4 = new Circle(circle1.center, 1);
