@@ -67,7 +67,7 @@ class Canvas {
   
   // general methods
   getEventOffset(event) {
-  	return new Point(event.pageX - this.offset.x, event.pageY - this.offset.y);
+  	return new Point(event.pageX - this.offset.x + this.drawingLayer.scrollLeft, event.pageY - this.offset.y + this.drawingLayer.scrollTop);
   }
   getAdjustedAngle(angle) {
   	return angle;
