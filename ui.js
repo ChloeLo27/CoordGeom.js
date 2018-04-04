@@ -25,7 +25,7 @@ class Canvas {
       this.bgLayer = bgLayer;
       this.height = divCanvas.offsetHeight; // TYPE: float
       this.width = divCanvas.offsetWidth; // TYPE: float
-      this.offset = new Point(divCanvas.offsetLeft, divCanvas.offsetTop); // TYPE: Point
+      this.offset = new Point(divCanvas.getBoundingClientRect().left, divCanvas.getBoundingClientRect().top); // TYPE: Point
       this.origin = new Point(0, 0); // TYPE: Point
       this.upwardsY = false; // TYPE: bool
       this.pointSize = 5;
@@ -159,9 +159,10 @@ class Canvas {
     lineSegmentOnCanvas.addEndPointsOnCanvas(endPoint1OnCanvas, endPoint2OnCanvas);
   }
   hideLineSegmentOnCanvasEndPoints(lineSegmentOnCanvas) {
-  	var endPointsOnCanvas = lineSegmentOnCanvas.endPointsOnCanvas;
+    var endPointsOnCanvas = lineSegmentOnCanvas.endPointsOnCanvas;
+    var _this = this;
     endPointsOnCanvas.forEach(function(endPointOnCanvas) {
-    	this.removePointOnCanvas(endPointOnCanvas);
+      _this.removePointOnCanvas(endPointOnCanvas);
     });
     lineSegmentOnCanvas.removeEndPointsOnCanvas();
   }
@@ -228,6 +229,6 @@ class LineSegmentOnCanvas {
     this.endPointsOnCanvas.push(point2OnCanvas);
   }
   removeEndPointsOnCanvas() {
-  	this.endPointsOnCanvas.empty();
+    this.endPointsOnCanvas.length = 0;
   }
 }
