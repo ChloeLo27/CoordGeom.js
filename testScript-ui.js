@@ -1,37 +1,21 @@
 // # UI COMPONENT
 
-// MARK: - test for class Canvas
+// MARK: - UI flow for testing
 
 var canvas = new Canvas();
-var pointReadyToMove;
-var pointMoved = false;
 
-canvas.DOMelement.addEventListener('click', function(event) {
-	var target = event.target;
-	if (target.tagName == "DIV" && target.id =="drawing-layer") {
-  	var offset = canvas.getEventOffset(event);
-  	var addedPoint = canvas.addPointOnCanvasWithAttributes(offset, {"class": "red", "custom-id": 56});
-  	console.log("angle of point to origin (clockwise)", addedPoint.point.angle);
-    addedPoint.DOMelement.addEventListener('mousedown', function() {
-    	pointReadyToMove = addedPoint;
-    	canvas.DOMelement.addEventListener('mousemove', movePointByDrag);
-    });
-    addedPoint.DOMelement.addEventListener('mouseup', function() {
-    	canvas.DOMelement.removeEventListener('mousemove', movePointByDrag);
-    	canvas.addClassToObject("red", pointReadyToMove);
-    	pointReadyToMove = null;
-    });
-  } else {
-  	if (!pointMoved) {
-    	canvas.removePointOnCanvasWithId(target.dataset.id);
-    }
-    pointMoved = false;
-  }
+var greyPoint = canvas.addPointOnCanvas(new Point(10,10));
+greyPoint.DOMelement.addEventListener('click', function() {
+	canvas.removePointOnCanvas(greyPoint);
+});
+var redPoint = canvas.addPointOnCanvasWithAttributes(new Point(20,20), {"class":"red", "data-custom": 563});
+redPoint.DOMelement.addEventListener('click', function() {
+	redPoint.moveTo(redPoint.point.translate(10,10));
 });
 
-function movePointByDrag(event) {
-	var offset = canvas.getEventOffset(event);
-	pointReadyToMove.moveTo(offset);
-	canvas.removeClassFromObject("red", pointReadyToMove);
-	pointMoved = true;
-}
+var point1 = new Point(100,30);
+var point2 = new Point(200,70);
+var lineSegment1 = new LineSegment(point1, point2);
+var greyLine = canvas.addLineSegmentOnCanvas(lineSegment1);
+console.log(greyLine);
+canvas.showLineSegmentOnCanvasEndPoints(greyLine);

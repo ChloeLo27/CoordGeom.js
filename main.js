@@ -9,6 +9,7 @@ RELEASES
 v0.0-alpha: 30 JAN 2018
 v0.1-alpha:  1 FEB 2018
 v0.2-alpha:  6 FEB 2018
+v0.3-alpha:  6 FEB 2018
 */
 
 // # ALBEGRA COMPONENT
@@ -561,29 +562,6 @@ function pointIsStrictlyInPolygon(point, polygon) { // TYPE: Point, Polygon
 }
 function pointIsStrictlyOutOfPolygon(point, polygon) { // TYPE: Point, Polygon
   return (!pointIsOnPolygonEdge(point, polygon) && !pointIsStrictlyInPolygon(point, polygon)); // TYPE: bool
-}
-function pointsDrawPolygon(points) { // TYPE: [Point]
-  if (points.length < 3) {
-    return false;
-  } else {
-    var angleSum = 0;
-    var toNextVertex;
-    var toPreviousVertex;
-    for (var i=0; i < points.length; i++) {
-      if (i == 0) {
-        toPreviousVertex = vectorFromPoints(points[0],points[points.length-1]);
-        toNextVertex = vectorFromPoints(points[0],points[1]);
-      } else if (i == (points.length-1)) {
-        toPreviousVertex = vectorFromPoints(points[i],points[i-1]);
-        toNextVertex = vectorFromPoints(points[i],points[0]);
-      } else {
-        toPreviousVertex = vectorFromPoints(points[i],points[i-1]);
-        toNextVertex = vectorFromPoints(points[i],points[i+1]);
-      }
-      angleSum += angleBetweenVectors(toPreviousVertex, toNextVertex);
-    }
-    return (angleSum == Math.PI*(points.length - 2)); // TYPE: bool
-  }
 }
 
 

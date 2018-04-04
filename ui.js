@@ -6,8 +6,6 @@ Creator:    Chloe Lo
 Created at: 30 JAN 2018
 */
 
-// # UI COMPONENT
-
 
 // MARK: - class Canvas
 
@@ -55,10 +53,24 @@ class Canvas {
     	return false;
     }
   }
+  get numberOfLineSegmentsOnCanvas() {
+  	return this.lineSegmentsOnCanvas.length; // TYPE: int
+  }
+  get lastLineSegmentOnCanvas() {
+  var n = parseInt(this.numberOfLineSegmentsOnCanvas);
+    if (n > 0) {
+    	return this.lineSegmentsOnCanvas[n-1];
+    } else {
+    	return false;
+    }
+  }
   
   // general methods
   getEventOffset(event) {
   	return new Point(event.pageX - canvas.offset.x, event.pageY - canvas.offset.y);
+  }
+  getAdjustedAngle(angle) {
+  	return angle;
   }
   addClassToObject(className, objectOnCanvas) {
   	var classString = className + " " + objectOnCanvas.DOMelement.getAttribute("class");
@@ -69,6 +81,7 @@ class Canvas {
   	var newClassString = classString.replace(className, "");
   	objectOnCanvas.DOMelement.setAttribute("class", newClassString);
   }
+  
   // method - point manipulation
   getPointWithId(id) {
   	return this.pointsOnCanvas.find(function (pointOnCanvas) {
@@ -113,6 +126,45 @@ class Canvas {
   	var pointOnCanvasToRemove = this.getPointWithId(id);
     this.removePointOnCanvas(pointOnCanvasToRemove);
   }
+  
+  // method - line segment manipulation
+  addLineSegmentOnCanvas(lineSegment) { // TYPE: LineSegment
+  	// create the DOM element
+  	var lineSegmentOnCanvas = new LineSegmentOnCanvas(lineSegment);
+    var lastLineSegmentOnCanvas = this.lastLineSegmentOnCanvas;
+    if (lastLineSegmentOnCanvas) {
+    	lineSegmentOnCanvas.id = lastLineSegmentOnCanvas.id + 1;
+    } else {
+    	lineSegmentOnCanvas.id = 0;
+    }
+    // add the point into canvas
+    this.drawingLayer.appendChild(lineSegmentOnCanvas.DOMelement);
+    this.lineSegmentsOnCanvas.push(lineSegmentOnCanvas);
+    return lineSegmentOnCanvas; // TYPE: LineSegmentOnCanvas
+  }
+  addLineSegmentOnCanvasWithAttributes(lineSegment, attributes) { // TYPE: Point, JSON
+  	var addedLineSegment = this.addLineSegmentOnCanvas(lineSegment);
+    // set custom attributes
+    if (attributes.hasOwnProperty("class")) {
+    	attributes["class"] += " line-segment";
+    }
+    for (var key in attributes) {
+    	addedLineSegment.DOMelement.setAttribute(key, attributes[key]);
+    }
+    return addedLineSegment; // TYPE: PointOnCanvas
+  }
+  showLineSegmentOnCanvasEndPoints(lineSegmentOnCanvas) {
+  	var endPoint1OnCanvas = this.addPointOnCanvas(lineSegmentOnCanvas.lineSegment.point1);
+    var endPoint2OnCanvas = this.addPointOnCanvas(lineSegmentOnCanvas.lineSegment.point2);
+    lineSegmentOnCanvas.addEndPointsOnCanvas(endPoint1OnCanvas, endPoint2OnCanvas);
+  }
+  hideLineSegmentOnCanvasEndPoints(lineSegmentOnCanvas) {
+  	var endPointsOnCanvas = lineSegmentOnCanvas.endPointsOnCanvas;
+    endPointsOnCanvas.forEach(function(endPointOnCanvas) {
+    	this.removePointOnCanvas(endPointOnCanvas);
+    });
+    lineSegmentOnCanvas.removeEndPointsOnCanvas();
+  }
 }
 
 // MARK: - class PoinOnCanvas
@@ -145,5 +197,37 @@ class PointOnCanvas {
     this.DOMelement.style.top = point.y + "px";
     this.DOMelement.style.left = point.x + "px";
     return this;
+  }
+}
+
+// MARK: - class LineSegmentOnCanvas
+
+class LineSegmentOnCanvas {
+	constructor(lineSegment) {
+  	this.lineSegment = lineSegment;
+    var lineSegmentDOMelement = document.createElement('span');
+    lineSegmentDOMelement.style.left = lineSegment.point1.x + 'px';
+    lineSegmentDOMelement.style.top = lineSegment.point1.y + 'px';
+    var length = lineSegment.length;
+    var angle = lineSegment.angle;
+		var rotateString = 'rotate(' + angle + 'rad)';
+    lineSegmentDOMelement.style.width = length+'px';
+    lineSegmentDOMelement.style.transform = rotateString;
+    lineSegmentDOMelement.style.msTransform = rotateString;
+    lineSegmentDOMelement.style.MozTransform = rotateString;
+    lineSegmentDOMelement.style.OTransform = rotateString;
+    lineSegmentDOMelement.style.webkitTransform = rotateString;
+    lineSegmentDOMelement.setAttribute("class", "line-segment");
+    // set attributes for better tracking of the objects
+    lineSegmentDOMelement.setAttribute("data-class", "LineSegment");
+    this.DOMelement = lineSegmentDOMelement;
+    this.endPointsOnCanvas = [];
+  }
+  addEndPointsOnCanvas(point1OnCanvas, point2OnCanvas) {
+  	this.endPointsOnCanvas.push(point1OnCanvas);
+    this.endPointsOnCanvas.push(point2OnCanvas);
+  }
+  removeEndPointsOnCanvas() {
+  	this.endPointsOnCanvas.empty();
   }
 }

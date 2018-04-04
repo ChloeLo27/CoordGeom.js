@@ -429,9 +429,5 @@ console.log(pointIsStrictlyOutOfPolygon(point7, polygon1));
 console.log(pointIsStrictlyOutOfPolygon(point8, polygon1));
 	// EXPECT: true
 
-// testing formation of polygon from points
-console.log("===== POINTS FORM POLYGON OR NOT =====");
-console.log(pointsDrawPolygon([point1, point3, point2, point5]));
-	// EXPECT: true
-console.log(pointsDrawPolygon([point1, point2, point3, point5]));
-	// expect: false
+
+	
