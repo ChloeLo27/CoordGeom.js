@@ -11,7 +11,6 @@ Please note that this framework is still under construction.
 
 ## Capabilities
 
-### Algebra Component
 This framework currently covers the following objects:
 - point
 - line
@@ -39,7 +38,3 @@ Also the following cross object functions:
 - point is strictly in polygon
 - point is on polygon edge
 - point is strictly out of polygon
-- the points draw a polygon
-
-### UI Component
-This framework also built in some basic drawing capabilities.  If you have a `<div />` with id `canvas` in your HTML body, then you may plot various geometrical objects onto it.
