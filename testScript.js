@@ -184,7 +184,7 @@ var point3 = new Point(1,2);
 var polygon1 = new Polygon([point1, point2, point3]);
 
 // test calculated properties
-console.log(polygon1.numberOfVertices);
+console.log(polygon1.n);
 	// EXPECT: 3
 console.log(polygon1.area);
 	// EXPECT: 4.5
