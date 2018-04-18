@@ -281,7 +281,7 @@ class Polygon {
   }
   
   // calculated properties
-  get numberOfVertices() {
+  get n() {
     return this.vertices.length; // TYPE: int
   }
   get area() {
