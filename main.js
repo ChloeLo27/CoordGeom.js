@@ -286,7 +286,7 @@ class Polygon {
   get area() {
     var total1 = 0;
     var total2 = 0;
-    var n = this.numberOfVertices;
+    var n = this.n;
     for (var i = 0; i < n; i++) {
       if (i == 0) {
         // handle first case
@@ -307,7 +307,7 @@ class Polygon {
   
   // methods
   translate(x,y) { // TYPE: float, float
-    for (var i=0; i<this.numberOfVertices; i++) {
+    for (var i=0; i<this.n; i++) {
       this.vertices[i].translate(x,y);
     }
     return this; // TYPE: Polygon
