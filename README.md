@@ -12,6 +12,12 @@ A JavaScript framework developed for coordinate geometry calculation with vector
 
 [https://ChloeLo27.github.io/CoordGeom.js](https://ChloeLo27.github.io/CoordGeom.js)
 
+## Installation
+
+Simply include the `main.js` file then you're done.
+
+Alternatively, you may directly link to the framework through the following url: [https://rawgit.com/ChloeLo27/CoordGeom.js/master/main.js](https://rawgit.com/ChloeLo27/CoordGeom.js/master/main.js)
+
 ## Capabilities
 
 This framework currently covers the following objects:
