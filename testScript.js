@@ -410,6 +410,7 @@ console.log(isCircleInCircle(circle1, circle2));
 console.log("===== IN OUT POLYGON =====");
 var point7 = new Point(3,4); // on edge
 var point8 = new Point(1,-1); // outside
+console.log(polygon1.translate(-3,-4)); // translate the polygon back to original
 console.log(pointIsOnPolygonEdge(origin, polygon1));
 	// EXPECT: false
 console.log(pointIsOnPolygonEdge(point7, polygon1));
