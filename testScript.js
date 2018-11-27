@@ -188,6 +188,10 @@ console.log(polygon1.n);
 	// EXPECT: 3
 console.log(polygon1.area);
 	// EXPECT: 4.5
+console.log(polygon1.maximumCorner);
+	// EXPECT: {x: 4, y: 5}
+console.log(polygon1.minimumCorner);
+	// EXPECT: {x: -5, y: -7}
 
 // test methods
 console.log(polygon1.translate(3,4));
@@ -431,4 +435,4 @@ console.log(pointIsStrictlyOutOfPolygon(point8, polygon1));
 	// EXPECT: true
 
 
-	
+

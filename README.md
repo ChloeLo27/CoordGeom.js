@@ -16,7 +16,13 @@ A JavaScript framework developed for coordinate geometry calculation with vector
 
 Simply include the `main.js` file then you're done.
 
-Alternatively, you may directly link to the framework through the following url: [https://rawgit.com/ChloeLo27/CoordGeom.js/master/main.js](https://rawgit.com/ChloeLo27/CoordGeom.js/master/main.js)
+Alternatively, you may directly link to the framework through the following urls for different releases:
+
+### First Public Release `v1.0` (Recommended)
+[https://cdn.jsdelivr.net/gh/ChloeLo27/CoordGeom.js@v1.0/main.js](https://cdn.jsdelivr.net/gh/ChloeLo27/CoordGeom.js@v1.0/main.js)
+
+### Edge (Use at your own risk)
+[https://cdn.jsdelivr.net/gh/ChloeLo27/CoordGeom.js/main.js](https://cdn.jsdelivr.net/gh/ChloeLo27/CoordGeom.js/main.js)
 
 ## Capabilities
 
