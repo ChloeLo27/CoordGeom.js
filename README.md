@@ -10,7 +10,11 @@ A JavaScript framework developed for coordinate geometry calculation with vector
 
 ## Documentation
 
+### First Public Release `v1.0` (Recommended)
 [https://ChloeLo27.github.io/CoordGeom.js](https://ChloeLo27.github.io/CoordGeom.js)
+
+### Edge (Use at your own risk)
+[https://ChloeLo27.github.io/CoordGeom.js/edge](https://ChloeLo27.github.io/CoordGeom.js/edge)
 
 ## Installation
 

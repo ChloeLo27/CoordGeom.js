@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Circle</title>
+    <title>JSDoc: Class: LineSegment</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Circle</h1>
+    <h1 class="page-title">Class: LineSegment</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Circle<span class="signature">(center, radius)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>LineSegment<span class="signature">(point1, point2)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">the class Circle</div>
+            <div class="class-description">class LineSegment, a line with two end points.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Circle"><span class="type-signature"></span>new Circle<span class="signature">(center, radius)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="LineSegment"><span class="type-signature"></span>new LineSegment<span class="signature">(point1, point2)</span><span class="type-signature"></span></h4>
     
 
     
@@ -85,7 +85,7 @@
 
         <tr>
             
-                <td class="name"><code>center</code></td>
+                <td class="name"><code>point1</code></td>
             
 
             <td class="type">
@@ -101,20 +101,20 @@
 
             
 
-            <td class="description last">the coordinates of the circle's center</td>
+            <td class="description last">the first end point of the line segment</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>radius</code></td>
+                <td class="name"><code>point2</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Point.html">Point</a></span>
 
 
             
@@ -124,7 +124,7 @@
 
             
 
-            <td class="description last">the length of the radius of the circle</td>
+            <td class="description last">the second send point of the line segment</td>
         </tr>
 
     
@@ -165,7 +165,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line562">line 562</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line245">line 245</a>
     </li></ul></dd>
     
 
@@ -213,13 +213,13 @@
 
         
             
-<h4 class="name" id="area"><span class="type-signature"></span>area<span class="type-signature"></span></h4>
+<h4 class="name" id="angle"><span class="type-signature"></span>angle<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the area of the circle
+    the angle made by the line segment with the horizontal
 </div>
 
 
@@ -257,7 +257,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line582">line 582</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line280">line 280</a>
     </li></ul></dd>
     
 
@@ -275,13 +275,13 @@
 
         
             
-<h4 class="name" id="circumference"><span class="type-signature"></span>circumference<span class="type-signature"></span></h4>
+<h4 class="name" id="dx"><span class="type-signature"></span>dx<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the length of the circumference of the circle
+    the horizontal run of the line segment
 </div>
 
 
@@ -319,7 +319,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line589">line 589</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line266">line 266</a>
     </li></ul></dd>
     
 
@@ -337,13 +337,13 @@
 
         
             
-<h4 class="name" id="diameter"><span class="type-signature"></span>diameter<span class="type-signature"></span></h4>
+<h4 class="name" id="dy"><span class="type-signature"></span>dy<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the diameter of the circle
+    the vertical rise of the line segment
 </div>
 
 
@@ -381,7 +381,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line575">line 575</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line273">line 273</a>
     </li></ul></dd>
     
 
@@ -398,83 +398,16 @@
 
 
         
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
             
+<h4 class="name" id="length"><span class="type-signature"></span>length<span class="type-signature"></span></h4>
 
-    
-
-    
-    <h4 class="name" id="setRadius"><span class="type-signature"></span>setRadius<span class="signature">(r)</span><span class="type-signature"> &rarr; {<a href="Circle.html">Circle</a>}</span></h4>
-    
-
-    
 
 
 
 <div class="description">
-    set a new radius for the circle
+    the length of the line segment
 </div>
 
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>r</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the new radius</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -510,7 +443,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line609">line 609</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line291">line 291</a>
     </li></ul></dd>
     
 
@@ -526,135 +459,17 @@
 
 
 
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    the circle with the new radius
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Circle.html">Circle</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
         
             
+<h4 class="name" id="midpoint"><span class="type-signature"></span>midpoint<span class="type-signature"></span></h4>
 
-    
-
-    
-    <h4 class="name" id="translate"><span class="type-signature"></span>translate<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {<a href="Circle.html">Circle</a>}</span></h4>
-    
-
-    
 
 
 
 <div class="description">
-    translate the circle by the given translation in x- and y-direction
+    the mid-point of the line segment
 </div>
 
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the translation in the x-direction</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the translation in the y-direction</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -690,7 +505,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line600">line 600</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line257">line 257</a>
     </li></ul></dd>
     
 
@@ -706,41 +521,71 @@
 
 
 
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
         
-<div class="param-desc">
-    the translated circle
+            
+<h4 class="name" id="slope"><span class="type-signature"></span>slope<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    the slope of the line segment, as in rise over run, i.e. dy/dx
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Circle.html">Circle</a></span>
 
 
-    </dd>
-</dl>
+
+
+<dl class="details">
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line298">line 298</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
 
         
+    
+
     
 
     
@@ -762,7 +607,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 17:02:40 GMT+0800 (HKT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 17:07:05 GMT+0800 (HKT)
 </footer>
 
 <script> prettyPrint(); </script>

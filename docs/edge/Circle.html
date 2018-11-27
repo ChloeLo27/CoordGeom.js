@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Polygon</title>
+    <title>JSDoc: Class: Circle</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Polygon</h1>
+    <h1 class="page-title">Class: Circle</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Polygon<span class="signature">(points)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Circle<span class="signature">(center, radius)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">The class Polygon</div>
+            <div class="class-description">the class Circle</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Polygon"><span class="type-signature"></span>new Polygon<span class="signature">(points)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Circle"><span class="type-signature"></span>new Circle<span class="signature">(center, radius)</span><span class="type-signature"></span></h4>
     
 
     
@@ -85,13 +85,13 @@
 
         <tr>
             
-                <td class="name"><code>points</code></td>
+                <td class="name"><code>center</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;<a href="Point.html">Point</a>></span>
+<span class="param-type"><a href="Point.html">Point</a></span>
 
 
             
@@ -101,7 +101,30 @@
 
             
 
-            <td class="description last">the array of points which form the polygon</td>
+            <td class="description last">the coordinates of the circle's center</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>radius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the length of the radius of the circle</td>
         </tr>
 
     
@@ -142,7 +165,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line442">line 442</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line562">line 562</a>
     </li></ul></dd>
     
 
@@ -196,7 +219,7 @@
 
 
 <div class="description">
-    the area of the polygon
+    the area of the circle
 </div>
 
 
@@ -234,7 +257,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line481">line 481</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line582">line 582</a>
     </li></ul></dd>
     
 
@@ -252,26 +275,16 @@
 
         
             
-<h4 class="name" id="edges"><span class="type-signature"></span>edges<span class="type-signature"> :Array.&lt;<a href="LineSegment.html">LineSegment</a>></span></h4>
+<h4 class="name" id="circumference"><span class="type-signature"></span>circumference<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    containing the edges of the polygon
+    the length of the circumference of the circle
 </div>
 
 
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Array.&lt;<a href="LineSegment.html">LineSegment</a>></span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -306,7 +319,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line466">line 466</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line589">line 589</a>
     </li></ul></dd>
     
 
@@ -324,13 +337,13 @@
 
         
             
-<h4 class="name" id="maximumCorner"><span class="type-signature"></span>maximumCorner<span class="type-signature"></span></h4>
+<h4 class="name" id="diameter"><span class="type-signature"></span>diameter<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the corner of the bounding box with the maximum x- and y- coordinates
+    the diameter of the circle
 </div>
 
 
@@ -368,203 +381,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line506">line 506</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="minimumCorner"><span class="type-signature"></span>minimumCorner<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    the corner of the bounding box with the minimum x- and y- coordinates
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line523">line 523</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="n"><span class="type-signature"></span>n<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    the degree or order of the polygon, i.e. the number of vertices or edges
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line474">line 474</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="vertices"><span class="type-signature"></span>vertices<span class="type-signature"> :Array.&lt;<a href="Point.html">Point</a>></span></h4>
-
-
-
-
-<div class="description">
-    containing the vertices of the polygon
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Array.&lt;<a href="Point.html">Point</a>></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line461">line 461</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line575">line 575</a>
     </li></ul></dd>
     
 
@@ -592,7 +409,7 @@
     
 
     
-    <h4 class="name" id="translate"><span class="type-signature"></span>translate<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {<a href="Polygon.html">Polygon</a>}</span></h4>
+    <h4 class="name" id="setRadius"><span class="type-signature"></span>setRadius<span class="signature">(r)</span><span class="type-signature"> &rarr; {<a href="Circle.html">Circle</a>}</span></h4>
     
 
     
@@ -600,7 +417,164 @@
 
 
 <div class="description">
-    translate the polygon by the given displacement in both x- and y-directions; this is not a clone and the original polygon is affected
+    set a new radius for the circle
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>r</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the new radius</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line609">line 609</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the circle with the new radius
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Circle.html">Circle</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="translate"><span class="type-signature"></span>translate<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {<a href="Circle.html">Circle</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    translate the circle by the given translation in x- and y-direction
 </div>
 
 
@@ -716,7 +690,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line544">line 544</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line600">line 600</a>
     </li></ul></dd>
     
 
@@ -743,7 +717,7 @@
 
         
 <div class="param-desc">
-    the translated polygon
+    the translated circle
 </div>
 
 
@@ -754,7 +728,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="Polygon.html">Polygon</a></span>
+<span class="param-type"><a href="Circle.html">Circle</a></span>
 
 
     </dd>
@@ -788,7 +762,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 17:02:40 GMT+0800 (HKT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 17:07:05 GMT+0800 (HKT)
 </footer>
 
 <script> prettyPrint(); </script>

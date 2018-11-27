@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: LineSegment</title>
+    <title>JSDoc: Class: Line</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: LineSegment</h1>
+    <h1 class="page-title">Class: Line</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>LineSegment<span class="signature">(point1, point2)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Line<span class="signature">(point1, point2)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">class LineSegment, a line with two end points.</div>
+            <div class="class-description">class Line, a line that extends infinitely in the 2D Euclidean plane</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="LineSegment"><span class="type-signature"></span>new LineSegment<span class="signature">(point1, point2)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Line"><span class="type-signature"></span>new Line<span class="signature">(point1, point2)</span><span class="type-signature"></span></h4>
     
 
     
@@ -101,7 +101,7 @@
 
             
 
-            <td class="description last">the first end point of the line segment</td>
+            <td class="description last">the first point that defines the line</td>
         </tr>
 
     
@@ -124,7 +124,7 @@
 
             
 
-            <td class="description last">the second send point of the line segment</td>
+            <td class="description last">the second point that defines the line</td>
         </tr>
 
     
@@ -165,7 +165,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line245">line 245</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line137">line 137</a>
     </li></ul></dd>
     
 
@@ -213,13 +213,13 @@
 
         
             
-<h4 class="name" id="angle"><span class="type-signature"></span>angle<span class="type-signature"></span></h4>
+<h4 class="name" id="c"><span class="type-signature"></span>c<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the angle made by the line segment with the horizontal
+    the y-coordinate of the y-intercept of the line
 </div>
 
 
@@ -257,7 +257,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line280">line 280</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line173">line 173</a>
     </li></ul></dd>
     
 
@@ -275,13 +275,13 @@
 
         
             
-<h4 class="name" id="dx"><span class="type-signature"></span>dx<span class="type-signature"></span></h4>
+<h4 class="name" id="isHorizontal"><span class="type-signature"></span>isHorizontal<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the horizontal run of the line segment
+    whether the line is horizontal or not
 </div>
 
 
@@ -319,7 +319,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line266">line 266</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line204">line 204</a>
     </li></ul></dd>
     
 
@@ -337,13 +337,13 @@
 
         
             
-<h4 class="name" id="dy"><span class="type-signature"></span>dy<span class="type-signature"></span></h4>
+<h4 class="name" id="isVertical"><span class="type-signature"></span>isVertical<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the vertical rise of the line segment
+    whether the line is vertical or not
 </div>
 
 
@@ -381,7 +381,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line273">line 273</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line197">line 197</a>
     </li></ul></dd>
     
 
@@ -399,13 +399,13 @@
 
         
             
-<h4 class="name" id="length"><span class="type-signature"></span>length<span class="type-signature"></span></h4>
+<h4 class="name" id="m"><span class="type-signature"></span>m<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the length of the line segment
+    the slope of the line
 </div>
 
 
@@ -443,7 +443,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line291">line 291</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line149">line 149</a>
     </li></ul></dd>
     
 
@@ -461,13 +461,13 @@
 
         
             
-<h4 class="name" id="midpoint"><span class="type-signature"></span>midpoint<span class="type-signature"></span></h4>
+<h4 class="name" id="xIntercept"><span class="type-signature"></span>xIntercept<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the mid-point of the line segment
+    the x-intercept of the line
 </div>
 
 
@@ -505,7 +505,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line257">line 257</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line184">line 184</a>
     </li></ul></dd>
     
 
@@ -523,13 +523,13 @@
 
         
             
-<h4 class="name" id="slope"><span class="type-signature"></span>slope<span class="type-signature"></span></h4>
+<h4 class="name" id="yIntercept"><span class="type-signature"></span>yIntercept<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    the slope of the line segment, as in rise over run, i.e. dy/dx
+    the y-intercept of the line
 </div>
 
 
@@ -567,7 +567,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line298">line 298</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -586,6 +586,324 @@
         
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="calX"><span class="type-signature"></span>calX<span class="signature">(y)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    get the x-coordinate of the given y-coordinate on the line
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the input y-coodinate</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line226">line 226</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the output x-coordinate, return NaN if the line is horizontal
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="calY"><span class="type-signature"></span>calY<span class="signature">(x)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    get the y-coordinate of a given x-coordinate on the line
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the input x-coordinate</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line214">line 214</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the output y-coordinate, return NaN if the line is vertical
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -607,7 +925,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 17:02:40 GMT+0800 (HKT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 17:07:05 GMT+0800 (HKT)
 </footer>
 
 <script> prettyPrint(); </script>
