@@ -27,35 +27,3 @@ Alternatively, you may directly link to the framework through the following urls
 
 ### Edge (Use at your own risk)
 [https://cdn.jsdelivr.net/gh/ChloeLo27/CoordGeom.js@latest/main.js](https://cdn.jsdelivr.net/gh/ChloeLo27/CoordGeom.js@latest/main.js)
-
-## Capabilities
-
-This framework currently covers the following objects:
-
--   point
--   line
--   vector
--   line segment
--   polygon
--   circle
-
-Also the following cross object functions:
-
--   intercept of two lines
--   line from point and slope
--   line from line segment
--   new point translated by vector
--   vector from two points
--   new point reflected in line
--   dot product of two vectors
--   angle between two vectors
--   intersection of a circle and a line
--   intersection of two circles
--   point is on line
--   point is on line segment
--   point is strictly in circle
--   point is on circle circumference
--   point is strictly out of circle
--   point is strictly in polygon
--   point is on polygon edge
--   point is strictly out of polygon
