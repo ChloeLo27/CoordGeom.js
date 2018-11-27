@@ -8,8 +8,9 @@ Created at: 24 JAN 2018
 RELEASES
 v0.0-alpha: 30 JAN 2018
 v0.3-alpha:  6 FEB 2018
-v0.5-alpha:  18 APR 2018
-v1.0: 25 MAY 2018
+v0.5-alpha: 18 APR 2018
+v1.0:       25 MAY 2018
+v1.2-alpha: 27 NOV 2018
 */
 
 // # ALBEGRA COMPONENT
